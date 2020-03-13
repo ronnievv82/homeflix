@@ -12,7 +12,7 @@ import Combine
 final class YTSService {
     private static let base: String = "https://yts.lt/api/v2"
 
-    static func torrents<M: MediaItemProtocol>(item: M) -> AnyPublisher<[Torrent], Never> {
+    static func torrents(item: MediaItem) -> AnyPublisher<[Torrent], Never> {
         let path: String = "/list_movies.json?query_term=\(item.imdbID)"
         return URLSession.shared.dataTaskPublisher(for: request(path: path))
             .map { $0.data }

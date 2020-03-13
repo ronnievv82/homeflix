@@ -81,17 +81,22 @@
 		13A8895623D8AF3400AD935A /* SiriRemoteGestureRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13A8895523D8AF3400AD935A /* SiriRemoteGestureRecognizer.swift */; };
 		13A8895923D8AFCB00AD935A /* EqualizerProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13A8895823D8AFCB00AD935A /* EqualizerProfile.swift */; };
 		13A8895B23D8B6E800AD935A /* MediaPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13A8895A23D8B6E800AD935A /* MediaPlayer.swift */; };
+		13A8895E23D8D09E00AD935A /* SiriRemotePlayPauseGesture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13A8895D23D8D09E00AD935A /* SiriRemotePlayPauseGesture.swift */; };
+		13A8896023D8D7CB00AD935A /* PlayerLoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13A8895F23D8D7CB00AD935A /* PlayerLoadingView.swift */; };
 		13B530D723CB8630009D2950 /* ShowEpisodesListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13B530D523CB8381009D2950 /* ShowEpisodesListController.swift */; };
 		13B530D923CB873A009D2950 /* ShowSeasonsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13B530D823CB873A009D2950 /* ShowSeasonsListViewController.swift */; };
 		13B67A3A23268CB800EC4B67 /* MovistackParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13B67A3923268CB800EC4B67 /* MovistackParser.swift */; };
 		13B67A3C23269D1600EC4B67 /* SourcePlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13B67A3B23269D1600EC4B67 /* SourcePlayerView.swift */; };
 		13B67A3E2326A0EC00EC4B67 /* VideoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13B67A3D2326A0EC00EC4B67 /* VideoView.swift */; };
+		13B6C2FF241B697D004B9DB8 /* TVViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13B6C2FE241B697D004B9DB8 /* TVViewController.swift */; };
+		13B6C4DE241BF7A4004B9DB8 /* SWXMLHash in Frameworks */ = {isa = PBXBuildFile; productRef = 13B6C4DD241BF7A4004B9DB8 /* SWXMLHash */; };
+		13B6C4E3241BFE05004B9DB8 /* MPUtils in Frameworks */ = {isa = PBXBuildFile; productRef = 13B6C4E2241BFE05004B9DB8 /* MPUtils */; };
 		13C7DEF7239C1DE7001BAAF0 /* Show.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13C7DEF6239C1DE7001BAAF0 /* Show.swift */; };
 		13C7DEF8239C1DE7001BAAF0 /* Show.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13C7DEF6239C1DE7001BAAF0 /* Show.swift */; };
 		13C7DEFA239C1E9B001BAAF0 /* EZTVService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13C7DEF9239C1E9B001BAAF0 /* EZTVService.swift */; };
 		13C7DEFB239C1E9B001BAAF0 /* EZTVService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13C7DEF9239C1E9B001BAAF0 /* EZTVService.swift */; };
-		13C7DEFD239C1F12001BAAF0 /* MediaItemProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13C7DEFC239C1F12001BAAF0 /* MediaItemProtocol.swift */; };
-		13C7DEFE239C1F12001BAAF0 /* MediaItemProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13C7DEFC239C1F12001BAAF0 /* MediaItemProtocol.swift */; };
+		13C7DEFD239C1F12001BAAF0 /* MediaItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13C7DEFC239C1F12001BAAF0 /* MediaItem.swift */; };
+		13C7DEFE239C1F12001BAAF0 /* MediaItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13C7DEFC239C1F12001BAAF0 /* MediaItem.swift */; };
 		13C7DF01239C23E1001BAAF0 /* EZTVTorrent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13C7DF00239C23E1001BAAF0 /* EZTVTorrent.swift */; };
 		13C7DF02239C23E1001BAAF0 /* EZTVTorrent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13C7DF00239C23E1001BAAF0 /* EZTVTorrent.swift */; };
 		13C7DF04239C28CE001BAAF0 /* YTSService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13C7DF03239C28CE001BAAF0 /* YTSService.swift */; };
@@ -155,8 +160,6 @@
 		13636CCA23942C0A0025215E /* ArrayExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrayExtension.swift; sourceTree = "<group>"; };
 		13636CCD23942CE10025215E /* MoviesRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesRow.swift; sourceTree = "<group>"; };
 		13636CD123958F480025215E /* MovieDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailView.swift; sourceTree = "<group>"; };
-		1364549023A0CCFA001A15EC /* PlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerView.swift; sourceTree = "<group>"; };
-		1364549223A0E59E001A15EC /* AVVideoPlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AVVideoPlayerView.swift; sourceTree = "<group>"; };
 		1364549523A0EEDE001A15EC /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		1364549823A0EF93001A15EC /* MoviesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesViewController.swift; sourceTree = "<group>"; };
 		1364549B23A0F1C9001A15EC /* ShowsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowsViewController.swift; sourceTree = "<group>"; };
@@ -180,14 +183,17 @@
 		13A8895523D8AF3400AD935A /* SiriRemoteGestureRecognizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SiriRemoteGestureRecognizer.swift; sourceTree = "<group>"; };
 		13A8895823D8AFCB00AD935A /* EqualizerProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EqualizerProfile.swift; sourceTree = "<group>"; };
 		13A8895A23D8B6E800AD935A /* MediaPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaPlayer.swift; sourceTree = "<group>"; };
+		13A8895D23D8D09E00AD935A /* SiriRemotePlayPauseGesture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SiriRemotePlayPauseGesture.swift; sourceTree = "<group>"; };
+		13A8895F23D8D7CB00AD935A /* PlayerLoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerLoadingView.swift; sourceTree = "<group>"; };
 		13B530D523CB8381009D2950 /* ShowEpisodesListController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowEpisodesListController.swift; sourceTree = "<group>"; };
 		13B530D823CB873A009D2950 /* ShowSeasonsListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowSeasonsListViewController.swift; sourceTree = "<group>"; };
 		13B67A3923268CB800EC4B67 /* MovistackParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovistackParser.swift; sourceTree = "<group>"; };
 		13B67A3B23269D1600EC4B67 /* SourcePlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SourcePlayerView.swift; sourceTree = "<group>"; };
 		13B67A3D2326A0EC00EC4B67 /* VideoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoView.swift; sourceTree = "<group>"; };
+		13B6C2FE241B697D004B9DB8 /* TVViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TVViewController.swift; sourceTree = "<group>"; };
 		13C7DEF6239C1DE7001BAAF0 /* Show.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Show.swift; sourceTree = "<group>"; };
 		13C7DEF9239C1E9B001BAAF0 /* EZTVService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EZTVService.swift; sourceTree = "<group>"; };
-		13C7DEFC239C1F12001BAAF0 /* MediaItemProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaItemProtocol.swift; sourceTree = "<group>"; };
+		13C7DEFC239C1F12001BAAF0 /* MediaItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaItem.swift; sourceTree = "<group>"; };
 		13C7DF00239C23E1001BAAF0 /* EZTVTorrent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EZTVTorrent.swift; sourceTree = "<group>"; };
 		13C7DF03239C28CE001BAAF0 /* YTSService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YTSService.swift; sourceTree = "<group>"; };
 		13C7DF06239C29EF001BAAF0 /* YTSTorrent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YTSTorrent.swift; sourceTree = "<group>"; };
@@ -220,9 +226,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				13B6C4DE241BF7A4004B9DB8 /* SWXMLHash in Frameworks */,
 				13634B9A239D3C9D00379093 /* libc++.tbd in Frameworks */,
 				1364549F23A0F861001A15EC /* SnapKit in Frameworks */,
 				4FB1DE420DB24F8E60C2E495 /* Pods_homeflixtvos.framework in Frameworks */,
+				13B6C4E3241BFE05004B9DB8 /* MPUtils in Frameworks */,
 				13636CB92392E6970025215E /* SwiftSoup in Frameworks */,
 				136A5B7F23A2D66000BC0D06 /* Kingfisher in Frameworks */,
 			);
@@ -346,7 +354,6 @@
 			isa = PBXGroup;
 			children = (
 				1342BE4823AD6A02003A5D00 /* PlayerViewController.swift */,
-				13672E5E23B7FB9D0056A621 /* PlayerInfoView.swift */,
 			);
 			path = Player;
 			sourceTree = "<group>";
@@ -446,8 +453,8 @@
 		1364548F23A0CCD6001A15EC /* Player */ = {
 			isa = PBXGroup;
 			children = (
-				1364549023A0CCFA001A15EC /* PlayerView.swift */,
-				1364549223A0E59E001A15EC /* AVVideoPlayerView.swift */,
+				13A8895F23D8D7CB00AD935A /* PlayerLoadingView.swift */,
+				13672E5E23B7FB9D0056A621 /* PlayerInfoView.swift */,
 			);
 			path = Player;
 			sourceTree = "<group>";
@@ -455,16 +462,17 @@
 		1364549423A0EEC7001A15EC /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				1309DD3723BE5F99008EECB3 /* Preload Player */,
-				1364549523A0EEDE001A15EC /* HomeViewController.swift */,
-				1364549723A0EF81001A15EC /* Movies */,
-				136A5B8323A386D700BC0D06 /* Movie detail */,
-				1364549A23A0F1B9001A15EC /* Shows */,
-				13148A9823C90E3800EC0DC3 /* Show detail */,
 				1305BDE623CF8E6D0019D365 /* Episode Torrent Select */,
+				1364549523A0EEDE001A15EC /* HomeViewController.swift */,
+				136A5B8323A386D700BC0D06 /* Movie detail */,
+				1364549723A0EF81001A15EC /* Movies */,
 				1342BE4723AD69EB003A5D00 /* Player */,
+				1309DD3723BE5F99008EECB3 /* Preload Player */,
 				1342BE4E23AE365B003A5D00 /* Search */,
 				1342BE5523AFB8AA003A5D00 /* Settings */,
+				13148A9823C90E3800EC0DC3 /* Show detail */,
+				1364549A23A0F1B9001A15EC /* Shows */,
+				13B6C2FD241B6950004B9DB8 /* TV */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -535,7 +543,7 @@
 		13666247232022D700ADADCB /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				13C7DEFC239C1F12001BAAF0 /* MediaItemProtocol.swift */,
+				13C7DEFC239C1F12001BAAF0 /* MediaItem.swift */,
 				1366624F23204CDD00ADADCB /* Movie.swift */,
 				13D0B88A23CB8A7100879687 /* Show */,
 				13C7DEFF239C23CC001BAAF0 /* Torrents */,
@@ -579,11 +587,20 @@
 		13A8895723D8AF4000AD935A /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
-				13A8895523D8AF3400AD935A /* SiriRemoteGestureRecognizer.swift */,
+				13A8895C23D8CFE400AD935A /* Siri Remote gestures */,
 				13A8895823D8AFCB00AD935A /* EqualizerProfile.swift */,
 				13A8895A23D8B6E800AD935A /* MediaPlayer.swift */,
 			);
 			path = Utilities;
+			sourceTree = "<group>";
+		};
+		13A8895C23D8CFE400AD935A /* Siri Remote gestures */ = {
+			isa = PBXGroup;
+			children = (
+				13A8895523D8AF3400AD935A /* SiriRemoteGestureRecognizer.swift */,
+				13A8895D23D8D09E00AD935A /* SiriRemotePlayPauseGesture.swift */,
+			);
+			path = "Siri Remote gestures";
 			sourceTree = "<group>";
 		};
 		13B530D323CB8321009D2950 /* Show Seaons List */ = {
@@ -600,6 +617,14 @@
 				13B530D523CB8381009D2950 /* ShowEpisodesListController.swift */,
 			);
 			path = "Show Episodes List";
+			sourceTree = "<group>";
+		};
+		13B6C2FD241B6950004B9DB8 /* TV */ = {
+			isa = PBXGroup;
+			children = (
+				13B6C2FE241B697D004B9DB8 /* TVViewController.swift */,
+			);
+			path = TV;
 			sourceTree = "<group>";
 		};
 		13C7DEF5239C1DC9001BAAF0 /* Models */ = {
@@ -707,6 +732,8 @@
 				13636CB82392E6970025215E /* SwiftSoup */,
 				1364549E23A0F861001A15EC /* SnapKit */,
 				136A5B7E23A2D66000BC0D06 /* Kingfisher */,
+				13B6C4DD241BF7A4004B9DB8 /* SWXMLHash */,
+				13B6C4E2241BFE05004B9DB8 /* MPUtils */,
 			);
 			productName = homeflixtvos;
 			productReference = 136662322320154B00ADADCB /* homeflixtvos.app */;
@@ -743,6 +770,8 @@
 				13426D5E22FA9ED900974C93 /* XCRemoteSwiftPackageReference "SwiftSoup" */,
 				1364549D23A0F861001A15EC /* XCRemoteSwiftPackageReference "SnapKit" */,
 				136A5B7B23A2D65500BC0D06 /* XCRemoteSwiftPackageReference "Kingfisher" */,
+				13B6C4DC241BF7A4004B9DB8 /* XCRemoteSwiftPackageReference "swxmlhash" */,
+				13B6C4DF241BFE05004B9DB8 /* XCRemoteSwiftPackageReference "MPUtils" */,
 			);
 			productRefGroup = 13426D4422FA9CA000974C93 /* Products */;
 			projectDirPath = "";
@@ -869,7 +898,7 @@
 				13C7DF11239C377F001BAAF0 /* MagnetLinker.swift in Sources */,
 				13C7DF07239C29EF001BAAF0 /* YTSTorrent.swift in Sources */,
 				13C7DEFA239C1E9B001BAAF0 /* EZTVService.swift in Sources */,
-				13C7DEFD239C1F12001BAAF0 /* MediaItemProtocol.swift in Sources */,
+				13C7DEFD239C1F12001BAAF0 /* MediaItem.swift in Sources */,
 				13C7DF0E239C35E6001BAAF0 /* CancelBag.swift in Sources */,
 				136A5B8123A2D77A00BC0D06 /* TMDBService.swift in Sources */,
 				13A8895323D8A90500AD935A /* UIColorExtension.swift in Sources */,
@@ -910,6 +939,7 @@
 				1335BE7B23C4F0A1000C66E7 /* HFError.swift in Sources */,
 				13A8895923D8AFCB00AD935A /* EqualizerProfile.swift in Sources */,
 				1305BDE823CF8E960019D365 /* EpisodeTorrentSelectViewController.swift in Sources */,
+				13A8895E23D8D09E00AD935A /* SiriRemotePlayPauseGesture.swift in Sources */,
 				1305BDE223CF7B9D0019D365 /* SeasonTableViewCell.swift in Sources */,
 				13636CCF23942CE10025215E /* MoviesRow.swift in Sources */,
 				13C7DF02239C23E1001BAAF0 /* EZTVTorrent.swift in Sources */,
@@ -934,16 +964,18 @@
 				136A5B8223A2D77A00BC0D06 /* TMDBService.swift in Sources */,
 				1342BE4923AD6A02003A5D00 /* PlayerViewController.swift in Sources */,
 				1342BE6123B10BE4003A5D00 /* ProgressBar.swift in Sources */,
-				13C7DEFE239C1F12001BAAF0 /* MediaItemProtocol.swift in Sources */,
+				13C7DEFE239C1F12001BAAF0 /* MediaItem.swift in Sources */,
 				13C7DF08239C29EF001BAAF0 /* YTSTorrent.swift in Sources */,
 				13636CCC23942C0A0025215E /* ArrayExtension.swift in Sources */,
 				13636CC6239425F70025215E /* SearchView.swift in Sources */,
 				13A8895623D8AF3400AD935A /* SiriRemoteGestureRecognizer.swift in Sources */,
 				1342BE5723AFB8C2003A5D00 /* SettingsViewController.swift in Sources */,
+				13A8896023D8D7CB00AD935A /* PlayerLoadingView.swift in Sources */,
 				1364549C23A0F1C9001A15EC /* ShowsViewController.swift in Sources */,
 				13148A9A23C90E4E00EC0DC3 /* ShowDetailViewController.swift in Sources */,
 				1309DD3A23BE6D2D008EECB3 /* SubtitlesService.swift in Sources */,
 				13C7DF12239C377F001BAAF0 /* MagnetLinker.swift in Sources */,
+				13B6C2FF241B697D004B9DB8 /* TVViewController.swift in Sources */,
 				13B530D723CB8630009D2950 /* ShowEpisodesListController.swift in Sources */,
 				1366624A232022E800ADADCB /* SearchResult.swift in Sources */,
 				1342BE5023AE366C003A5D00 /* SearchViewController.swift in Sources */,
@@ -1158,9 +1190,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"homeflixtvos/Preview Content\"";
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 6H6W45P449;
 				ENABLE_PREVIEWS = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1192,9 +1224,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"homeflixtvos/Preview Content\"";
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 6H6W45P449;
 				ENABLE_PREVIEWS = YES;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1273,6 +1305,22 @@
 				minimumVersion = 5.11.0;
 			};
 		};
+		13B6C4DC241BF7A4004B9DB8 /* XCRemoteSwiftPackageReference "swxmlhash" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/drmohundro/swxmlhash";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.1;
+			};
+		};
+		13B6C4DF241BFE05004B9DB8 /* XCRemoteSwiftPackageReference "MPUtils" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "git@github.com:martinpucik/MPUtils.git";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -1305,6 +1353,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 136A5B7B23A2D65500BC0D06 /* XCRemoteSwiftPackageReference "Kingfisher" */;
 			productName = Kingfisher;
+		};
+		13B6C4DD241BF7A4004B9DB8 /* SWXMLHash */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 13B6C4DC241BF7A4004B9DB8 /* XCRemoteSwiftPackageReference "swxmlhash" */;
+			productName = SWXMLHash;
+		};
+		13B6C4E2241BFE05004B9DB8 /* MPUtils */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 13B6C4DF241BFE05004B9DB8 /* XCRemoteSwiftPackageReference "MPUtils" */;
+			productName = MPUtils;
 		};
 /* End XCSwiftPackageProductDependency section */
 

@@ -9,39 +9,25 @@
 import Foundation
 
 private enum CodingKeys: String, CodingKey {
-    case show
-    case title
-    case year
-    case ids
-    case imdb
-    case trakt
-    case tmdb
+    case show, title, year, ids, imdb, trakt, tmdb
 }
 
-struct Show: Decodable, MediaItemProtocol, Hashable {
-    let id: String
-    let name: String
-    let year: String
-    let imdbID: String
-    let tmdbID: String
+final class Show: MediaItem, Decodable {
 
-    init(from decoder: Decoder) throws {
+    // MARK: - Lifecycle
+    required init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         let movieContainer = try container.nestedContainer(keyedBy: CodingKeys.self, forKey: .show)
-        name = try movieContainer.decode(String.self, forKey: .title)
+        let name = try movieContainer.decode(String.self, forKey: .title)
         let yearInt = try movieContainer.decode(Int.self, forKey: .year)
-        year = "\(yearInt)"
+        let year = "\(yearInt)"
+
         let idsContainer = try movieContainer.nestedContainer(keyedBy: CodingKeys.self, forKey: .ids)
-        imdbID = try idsContainer.decode(String.self, forKey: .imdb)
-
-        let id = try idsContainer.decode(Int.self, forKey: .trakt)
-        self.id = "\(id)"
-
-        let tmdbID = try idsContainer.decode(Int.self, forKey: .tmdb)
-        self.tmdbID = "\(tmdbID)"
-    }
-
-    func hash(into hasher: inout Hasher) {
-        hasher.combine(id)
+        let imdbID = try idsContainer.decode(String.self, forKey: .imdb)
+        let idInt = try idsContainer.decode(Int.self, forKey: .trakt)
+        let id = "\(idInt)"
+        let tmdbIDInt = try idsContainer.decode(Int.self, forKey: .tmdb)
+        let tmdbID = "\(tmdbIDInt)"
+        super.init(id: id, name: name, imdbID: imdbID, tmdbID: tmdbID, year: year)
     }
 }

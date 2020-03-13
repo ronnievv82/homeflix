@@ -47,7 +47,7 @@ final class MovieCollectionViewCell: UICollectionViewCell {
 
     // MARK: - Public methods
 
-    func update(media: MediaItemProtocol) {
+    func update(media: MediaItem) {
         titleLabel.text = media.name
         TMDBService.getPosterFor(mediaType: media is Movie ? .movie : .tv, tmdb: media.tmdbID)
             .receive(on: DispatchQueue.main)

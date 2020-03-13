@@ -14,12 +14,13 @@ final class HomeViewController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        setViewControllers([moviesController, showsController, searchController, settingsController],
+        setViewControllers([moviesController, showsController, tvController, searchController, settingsController],
                            animated: true)
     }
 
     private lazy var moviesController: MoviesViewController = MoviesViewController()
     private lazy var showsController: ShowsViewController = ShowsViewController()
+    private lazy var tvController: TVViewController = TVViewController()
     private lazy var searchController: SearchViewController = SearchViewController()
     private lazy var settingsController: SettingsViewController = SettingsViewController()
 

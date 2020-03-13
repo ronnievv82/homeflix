@@ -14,7 +14,9 @@ import MediaPlayer
 
 final class PlayerViewController: UIViewController {
 
-    private let media: MediaItemProtocol
+    // MARK: - Private properties
+
+    private let media: MediaItem
     private let torrent: Torrent
     private lazy var streamer: PTTorrentStreamer = PTTorrentStreamer()
 
@@ -22,7 +24,8 @@ final class PlayerViewController: UIViewController {
     private var selectedSubtitle: Subtitle?
     private let bag: CancelBag = CancelBag()
 
-    init(torrent: Torrent, media: MediaItemProtocol) {
+    // MARK: - Lifecycle
+    init(torrent: Torrent, media: MediaItem) {
         self.torrent = torrent
         self.media = media
         super.init(nibName: nil, bundle: nil)
@@ -34,28 +37,23 @@ final class PlayerViewController: UIViewController {
             let totalDown = ByteCountFormatter.string(fromByteCount: down, countStyle: .decimal)
             let up = self?.streamer.totalUploaded.longLongValue ?? 0
             let totalUp = ByteCountFormatter.string(fromByteCount: up, countStyle: .decimal)
-            self?.statusLabel.text = "Loading: \(per)% - D: \(totalDown) | U: \(totalUp)"
+//            self?.statusLabel.text = "Loading: \(per)% - D: \(totalDown) | U: \(totalUp)"
             self?.progressBar.bufferProgress = status.totalProgress
         }, readyToPlay: { [weak self] (url, fileUrl) in
             DispatchQueue.main.async {
                 self?.play(url: url)
                 self?.loadSubtitles(fileURL: fileUrl)
             }
-        }, failure: { (err) in
+        }, failure: { [weak self] (err) in
             print(err)
+            self?.dismiss(animated: true, completion: nil)
         }) { (files) -> Int32 in
             print(files)
             let file = files.first(where: { $0.contains("mp4") || $0.contains("mkv") || $0.contains("avi") }) ?? ""
             return Int32(files.firstIndex(of: file) ?? 0)
         }
 
-        SubtitlesService.search(imdbId: media.imdbID).replaceError(with: [])
-            .assign(to: \.subtitles, on: self).dispose(bag)
-
-//        $subtitles.filter { !$0.isEmpty }.map { $0.first! }.mapError { $0 as Error }
-//            .flatMap { $0.download() }.sink(receiveCompletion: { _ in }, receiveValue: { url in
-//                print(url)
-//            }).dispose(bag)
+        SubtitlesService.search(imdbId: media.imdbID).assign(to: \.subtitles, on: self).dispose(bag)
     }
 
     required init?(coder: NSCoder) { nil }
@@ -71,11 +69,10 @@ final class PlayerViewController: UIViewController {
         setupAppearance()
     }
 
-    private lazy var tapRecognizer: UITapGestureRecognizer = {
-        let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(playPauseAction))
-        tapRecognizer.allowedPressTypes = [NSNumber(value: UIPress.PressType.playPause.rawValue),
-                                           NSNumber(value: UIPress.PressType.select.rawValue)]
-        return tapRecognizer
+    private lazy var playPauseRecognizer: SiriRemotePlayPauseGesture = {
+        SiriRemotePlayPauseGesture { [weak self] in
+            (self?.mediaPlayer.isPlaying ?? false) ? self?.mediaPlayer.pause() : self?.mediaPlayer.play()
+        }
     }()
 
     private lazy var swipeDownRecognizer: UISwipeGestureRecognizer = {
@@ -90,47 +87,6 @@ final class PlayerViewController: UIViewController {
         return gesture
     }()
 
-    private lazy var loadingContainer: UIView = {
-        let view = UIView()
-        view.addSubview(nameLabel)
-        view.addSubview(activity)
-        view.addSubview(statusLabel)
-
-        activity.snp.makeConstraints { $0.center.equalToSuperview() }
-        statusLabel.snp.makeConstraints { (make) in
-            make.centerX.equalToSuperview()
-            make.top.equalTo(activity.snp.bottom).offset(24)
-        }
-        nameLabel.snp.makeConstraints { (make) in
-            make.centerX.equalToSuperview()
-            make.bottom.equalTo(activity.snp.top).offset(-24)
-        }
-        return view
-    }()
-
-    private lazy var nameLabel: UILabel = {
-        let label = UILabel()
-        label.font = UIFont.preferredFont(forTextStyle: .title2)
-        label.textAlignment = .center
-        label.text = media.name
-        return label
-    }()
-
-    private lazy var activity: UIActivityIndicatorView = {
-        let view = UIActivityIndicatorView(style: UIActivityIndicatorView.Style.large)
-        view.hidesWhenStopped = true
-        view.startAnimating()
-        return view
-    }()
-
-    private lazy var statusLabel: UILabel = {
-        let label = UILabel()
-        label.font = UIFont.preferredFont(forTextStyle: .subheadline)
-        label.textAlignment = .center
-        label.text = "Loading ..."
-        return label
-    }()
-
     private lazy var timeLabel: UILabel = {
         let label = UILabel()
         label.textAlignment = .center
@@ -140,7 +96,7 @@ final class PlayerViewController: UIViewController {
     }()
 
     private lazy var playerView: UIView = UIView()
-    private lazy var mediaPlayer: VLCMediaPlayer = VLCMediaPlayer()
+    private lazy var mediaPlayer: MediaPlayer = MediaPlayer()
     private lazy var progressView: UIView = UIView()
     private lazy var progressBar: ProgressBar = ProgressBar(frame: .zero)
     private var infoView: PlayerInfoView?
@@ -148,8 +104,7 @@ final class PlayerViewController: UIViewController {
 
 private extension PlayerViewController {
     func setupAppearance() {
-        view.addSubview(loadingContainer)
-        view.addGestureRecognizer(tapRecognizer)
+        playPauseRecognizer.addToView(view)
         view.addGestureRecognizer(swipeDownRecognizer)
         view.addGestureRecognizer(swipeUpRecognizer)
 
@@ -159,7 +114,7 @@ private extension PlayerViewController {
         progressView.addSubview(progressBar)
         progressView.addSubview(timeLabel)
 
-        loadingContainer.snp.makeConstraints { $0.center.width.equalToSuperview() }
+//        loadingContainer.snp.makeConstraints { $0.center.width.equalToSuperview() }
 
         playerView.alpha = 0
         playerView.snp.makeConstraints { $0.edges.equalToSuperview() }
@@ -189,37 +144,22 @@ private extension PlayerViewController {
     }
 
     func play(url: URL) {
-        loadingContainer.alpha = 0
+//        loadingContainer.alpha = 0
 
         try? AVAudioSession.sharedInstance().setCategory(.playback, mode: .moviePlayback)
-
         mediaPlayer.delegate = self
-        mediaPlayer.audio.passthrough = true
         mediaPlayer.drawable = playerView
         mediaPlayer.media = VLCMedia(url: url)
         mediaPlayer.play()
 
-        let settings = SubtitleSettings.shared
-        (mediaPlayer as VLCFontAppearance).setTextRendererFontSize?(NSNumber(value: settings.size.rawValue))
-        (mediaPlayer as VLCFontAppearance).setTextRendererFontColor?(NSNumber(value: settings.color.hexInt))
-        (mediaPlayer as VLCFontAppearance).setTextRendererFont?(settings.font.fontName as NSString)
-        (mediaPlayer as VLCFontAppearance).setTextRendererFontForceBold?(NSNumber(booleanLiteral: settings.style == .bold || settings.style == .boldItalic))
-        mediaPlayer.media.addOptions(["subsdec-encoding": settings.encoding])
-
         playerView.alpha = 1
         progressBar.alpha = 1
-
-        didSelectEqualizerProfile(.fullDynamicRange)
     }
 
     func loadSubtitles(fileURL: URL?) {
         subtitles.first?.download().sink(receiveCompletion: { _ in }, receiveValue: { [weak self] url in
             self?.mediaPlayer.addPlaybackSlave(url, type: .subtitle, enforce: true)
         }).dispose(bag)
-    }
-
-    @objc func playPauseAction() {
-        mediaPlayer.isPlaying ? mediaPlayer.pause() : mediaPlayer.play()
     }
 
     @objc func swipeDownAction() {
@@ -293,10 +233,7 @@ private extension PlayerViewController {
 //            progressBar.screenshot = image
 //        }
     }
-    func didSelectEqualizerProfile(_ profile: EqualizerProfiles) {
-        mediaPlayer.resetEqualizer(fromProfile: profile.rawValue)
-        mediaPlayer.equalizerEnabled = true
-    }
+
 }
 
 extension PlayerViewController: VLCMediaPlayerDelegate {

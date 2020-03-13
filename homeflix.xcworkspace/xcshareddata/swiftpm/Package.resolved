@@ -6,8 +6,17 @@
         "repositoryURL": "git@github.com:onevcat/Kingfisher.git",
         "state": {
           "branch": null,
-          "revision": "d5e9aa41e5cc74a0f81801148e5ac1985d67b6ba",
-          "version": "5.11.0"
+          "revision": "56075f629bc3915e1bfa876d175df67e1a7cbe3c",
+          "version": "5.13.2"
+        }
+      },
+      {
+        "package": "MPUtils",
+        "repositoryURL": "git@github.com:martinpucik/MPUtils.git",
+        "state": {
+          "branch": "master",
+          "revision": "f30b140e15a8e436d2843e22a3408a87c2cba6ac",
+          "version": null
         }
       },
       {
@@ -24,8 +33,17 @@
         "repositoryURL": "https://github.com/scinfu/SwiftSoup.git",
         "state": {
           "branch": null,
-          "revision": "34a24b6e27fe6302c5b5630325b64adc3e3b5bca",
-          "version": "2.2.2"
+          "revision": "7f187fd8804e63dea89879c95d7c2f7703727d0f",
+          "version": "2.3.0"
+        }
+      },
+      {
+        "package": "SWXMLHash",
+        "repositoryURL": "https://github.com/drmohundro/swxmlhash",
+        "state": {
+          "branch": null,
+          "revision": "a4931e5c3bafbedeb1601d3bb76bbe835c6d475a",
+          "version": "5.0.1"
         }
       }
     ]

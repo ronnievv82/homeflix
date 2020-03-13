@@ -17,13 +17,13 @@ private enum OpenSubtitles {
 }
 
 final class SubtitlesService {
-    static func search(imdbId: String? = nil, videoFilePath: URL? = nil) -> AnyPublisher<[Subtitle], Error> {
+    static func search(imdbId: String? = nil, videoFilePath: URL? = nil) -> AnyPublisher<[Subtitle], Never> {
         let req = request(params: getParams(imdbId: imdbId, videoFilePath: videoFilePath))
         return URLSession.shared.dataTaskPublisher(for: req)
             .map { $0.data }
             .decode(type: [Subtitle].self, decoder: JSONDecoder())
             .map { $0.sorted(by: { $0.downloadCount > $1.downloadCount })}
-            .print()
+            .replaceError(with: [])
             .eraseToAnyPublisher()
     }
 

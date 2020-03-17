@@ -18,11 +18,12 @@ final class TVViewController: UIViewController {
         let id: String
         let title: String
         let previewImageUrl: String
+        let isVod: String
     }
 
     struct Playlist {
         let main: String
-        let timeshift: String
+        let timeshift: String?
     }
 
     private let BASE_XML_URL = "https://www.ceskatelevize.cz"
@@ -55,7 +56,16 @@ final class TVViewController: UIViewController {
         tableView.snp.makeConstraints { (make) in
             make.edges.equalToSuperview()
         }
+    }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.channels = []
+        tableView.reloadData()
+    }
+
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         getToken().sink(receiveValue: { [weak self] (token) in
             self?.token = token
             self?.fetchPrograms()
@@ -121,11 +131,14 @@ private extension TVViewController {
                         !id.isEmpty,
                         let title = child["live"]["programme"]["channelTitle"].element?.text,
                         !title.isEmpty,
-                        let preview = child["live"]["programme"]["imageURL"].element?.text
-                        else {
-                            return nil
+                        let preview = child["live"]["programme"]["imageURL"].element?.text,
+                        let isVod = child["live"]["programme"]["isVod"].element?.text
+                    else {
+                        return nil
                     }
-                    return Channel(id: id, title: title, previewImageUrl: preview)
+                    print(child["live"]["programme"])
+                    print("\n\n")
+                    return Channel(id: id, title: title, previewImageUrl: preview, isVod: isVod)
                 }
 
                 self?.channels = channels
@@ -137,12 +150,25 @@ private extension TVViewController {
 
     func getPlaylist(channel: Channel) {
         var req2 = URLRequest(url: URL(string: "\(BASE_XML_URL)/services/ivysilani/xml/playlisturl/")!)
-        req2.allHTTPHeaderFields = ["Content-Type": "application/x-www-form-urlencoded"]
+        req2.allHTTPHeaderFields = ["Content-type": "application/x-www-form-urlencoded",
+                                    "Accept-encoding": "gzip",
+                                    "Connection": "Keep-Alive",
+                                    "User-Agent": "Dalvik/1.6.0 (Linux; U; Android 4.4.4; Nexus 7 Build/KTU84P)"]
         req2.httpMethod = "POST"
-        req2.httpBody = "token=\(token)&ID=\(channel.id)&quality=web&playerType=ios&playlistType=json".data(using: .utf8)
+        let quality: String = channel.isVod == "1" ? "max720p" : "web"
+        let playerType: String = channel.isVod == "1" ? "progressive" : "ios"
+        let params = [
+            "token": token,
+            "ID": channel.id,
+            "quality": quality,
+            "playerType": playerType,
+            "playlistType": "json"
+        ]
+        req2.httpBody = params.percentEncoded()
         URLSession.shared.dataTaskPublisher(for: req2)
             .compactMap { (data, _) -> URL? in
                 let xml = SWXMLHash.parse(data)
+                print(xml)
                 let string = xml["playlistURL"].element?.text ?? ""
                 return URL(string: string)
             }
@@ -157,11 +183,34 @@ private extension TVViewController {
                 if let obj = obj as? [String: Any],
                     let arr = obj["playlist"] as? [[String: Any]],
                     let play = arr.first?["streamUrls"] as? [String: Any],
-                    let main = play["main"] as? String,
-                    let time = play["timeshift"] as? String {
+                    let main = play["main"] as? String {
+                    let time = play["timeshift"] as? String
                     self?.playlist = Playlist(main: main, timeshift: time)
                 }
             })
             .store(in: &bag)
     }
+}
+
+extension Dictionary {
+    func percentEncoded() -> Data? {
+        return map { key, value in
+            let escapedKey = "\(key)".addingPercentEncoding(withAllowedCharacters: .urlQueryValueAllowed) ?? ""
+            let escapedValue = "\(value)".addingPercentEncoding(withAllowedCharacters: .urlQueryValueAllowed) ?? ""
+            return escapedKey + "=" + escapedValue
+        }
+        .joined(separator: "&")
+        .data(using: .utf8)
+    }
+}
+
+extension CharacterSet {
+    static let urlQueryValueAllowed: CharacterSet = {
+        let generalDelimitersToEncode = ":#[]@" // does not include "?" or "/" due to RFC 3986 - Section 3.4
+        let subDelimitersToEncode = "!$&'()*+,;="
+
+        var allowed = CharacterSet.urlQueryAllowed
+        allowed.remove(charactersIn: "\(generalDelimitersToEncode)\(subDelimitersToEncode)")
+        return allowed
+    }()
 }

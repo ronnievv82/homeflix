@@ -56,6 +56,10 @@ final class TVViewController: UIViewController {
         tableView.snp.makeConstraints { (make) in
             make.edges.equalToSuperview()
         }
+
+        NotificationCenter.default.addObserver(self, selector: #selector(becameActive),
+                                               name: UIApplication.didBecomeActiveNotification,
+                                               object: nil)
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -189,6 +193,17 @@ private extension TVViewController {
                 }
             })
             .store(in: &bag)
+    }
+
+    @objc func becameActive() {
+        self.channels = []
+        self.tableView.reloadData()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            self.getToken().sink(receiveValue: { [weak self] (token) in
+                self?.token = token
+                self?.fetchPrograms()
+            }).store(in: &self.bag)
+        }
     }
 }
 

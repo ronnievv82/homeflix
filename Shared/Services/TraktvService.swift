@@ -51,11 +51,21 @@ final class TraktvService {
         .replaceError(with: [])
         .eraseToAnyPublisher()
     }
+
+    static func search(_ query: String) -> AnyPublisher<[TraktSearchResult], Never> {
+        return URLSession.shared.dataTaskPublisher(for: request(path: "/search/movie,show?query=\(query)"))
+            .map { $0.data }
+            .decode(type: [TraktSearchResult].self, decoder: JSONDecoder())
+            .replaceError(with: [])
+            .eraseToAnyPublisher()
+    }
 }
 
 private extension TraktvService {
     static func request(path: String) -> URLRequest {
-        var request = URLRequest(url: URL(string: "\(base)\(path)")!)
+        let fullPath = base + path
+        let escapedPath = fullPath.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
+        var request = URLRequest(url: URL(string: escapedPath)!)
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         request.setValue("2", forHTTPHeaderField: "trakt-api-version")
         request.setValue(clientId, forHTTPHeaderField: "trakt-api-key")

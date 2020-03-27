@@ -44,7 +44,7 @@ final class TVViewController: UIViewController {
 
     init() {
         super.init(nibName: nil, bundle: nil)
-        tabBarItem = UITabBarItem(title: "TV", image: nil, tag: 0)
+        tabBarItem = UITabBarItem(title: "TV", image: UIImage(systemName: "tv"), tag: 0)
     }
 
     required init?(coder: NSCoder) { nil }
@@ -140,8 +140,8 @@ private extension TVViewController {
                     else {
                         return nil
                     }
-                    print(child["live"]["programme"])
-                    print("\n\n")
+//                    print(child["live"]["programme"])
+//                    print("\n\n")
                     return Channel(id: id, title: title, previewImageUrl: preview, isVod: isVod)
                 }
 

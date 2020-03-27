@@ -12,6 +12,7 @@ import SnapKit
 
 private enum Section {
     case main
+    case loadNext
 }
 
 final class MoviesViewController: UIViewController {
@@ -38,8 +39,8 @@ final class MoviesViewController: UIViewController {
         viewModel.$movies.sink { [weak self] mov in
             guard let self = self else { return }
             var snapshot = NSDiffableDataSourceSnapshot<Section, Movie>()
-            snapshot.appendSections([.main])
-            snapshot.appendItems(mov)
+            snapshot.appendSections([.main, .loadNext])
+            snapshot.appendItems(mov, toSection: .main)
             self.dataSource.apply(snapshot)
         }.dispose(bag)
     }

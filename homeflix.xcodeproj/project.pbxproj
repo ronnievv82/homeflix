@@ -57,7 +57,6 @@
 		136454A123A0F874001A15EC /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 136454A023A0F874001A15EC /* SnapKit */; };
 		136662352320154B00ADADCB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 136662342320154B00ADADCB /* AppDelegate.swift */; };
 		136662392320154C00ADADCB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 136662382320154C00ADADCB /* Assets.xcassets */; };
-		1366623C2320154C00ADADCB /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1366623B2320154C00ADADCB /* Preview Assets.xcassets */; };
 		1366623F2320154C00ADADCB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1366623D2320154C00ADADCB /* LaunchScreen.storyboard */; };
 		13666249232022E800ADADCB /* SearchResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13666248232022E800ADADCB /* SearchResult.swift */; };
 		1366624A232022E800ADADCB /* SearchResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13666248232022E800ADADCB /* SearchResult.swift */; };
@@ -73,6 +72,10 @@
 		136A5B8223A2D77A00BC0D06 /* TMDBService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 136A5B8023A2D77A00BC0D06 /* TMDBService.swift */; };
 		136A5B8523A386EB00BC0D06 /* MovieDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 136A5B8423A386EB00BC0D06 /* MovieDetailViewController.swift */; };
 		136A5B8723A3872F00BC0D06 /* MovieDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 136A5B8623A3872F00BC0D06 /* MovieDetailViewModel.swift */; };
+		1377F743242DDF6B00924074 /* TraktSearchResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1377F742242DDF6B00924074 /* TraktSearchResult.swift */; };
+		1377F744242DDF6B00924074 /* TraktSearchResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1377F742242DDF6B00924074 /* TraktSearchResult.swift */; };
+		1377F746242DE9F800924074 /* SearchResultCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1377F745242DE9F800924074 /* SearchResultCollectionViewCell.swift */; };
+		1377F747242DE9F800924074 /* SearchResultCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1377F745242DE9F800924074 /* SearchResultCollectionViewCell.swift */; };
 		13A8894E23D8A15600AD935A /* VLCMediaPlayerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13A8894D23D8A15600AD935A /* VLCMediaPlayerExtension.swift */; };
 		13A8895023D8A1D600AD935A /* SubtitleSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13A8894F23D8A1D600AD935A /* SubtitleSettings.swift */; };
 		13A8895123D8A1D600AD935A /* SubtitleSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13A8894F23D8A1D600AD935A /* SubtitleSettings.swift */; };
@@ -166,7 +169,6 @@
 		136662322320154B00ADADCB /* homeflixtvos.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = homeflixtvos.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		136662342320154B00ADADCB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		136662382320154C00ADADCB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		1366623B2320154C00ADADCB /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		1366623E2320154C00ADADCB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		136662402320154C00ADADCB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		13666248232022E800ADADCB /* SearchResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResult.swift; sourceTree = "<group>"; };
@@ -177,6 +179,8 @@
 		136A5B8023A2D77A00BC0D06 /* TMDBService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TMDBService.swift; sourceTree = "<group>"; };
 		136A5B8423A386EB00BC0D06 /* MovieDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailViewController.swift; sourceTree = "<group>"; };
 		136A5B8623A3872F00BC0D06 /* MovieDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailViewModel.swift; sourceTree = "<group>"; };
+		1377F742242DDF6B00924074 /* TraktSearchResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TraktSearchResult.swift; sourceTree = "<group>"; };
+		1377F745242DE9F800924074 /* SearchResultCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultCollectionViewCell.swift; sourceTree = "<group>"; };
 		13A8894D23D8A15600AD935A /* VLCMediaPlayerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VLCMediaPlayerExtension.swift; sourceTree = "<group>"; };
 		13A8894F23D8A1D600AD935A /* SubtitleSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubtitleSettings.swift; sourceTree = "<group>"; };
 		13A8895223D8A90500AD935A /* UIColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColorExtension.swift; sourceTree = "<group>"; };
@@ -506,17 +510,8 @@
 				1342BE4A23AE27F8003A5D00 /* homeflixtvos-Bridging-Header.h */,
 				1366623D2320154C00ADADCB /* LaunchScreen.storyboard */,
 				136662402320154C00ADADCB /* Info.plist */,
-				1366623A2320154C00ADADCB /* Preview Content */,
 			);
 			path = homeflixtvos;
-			sourceTree = "<group>";
-		};
-		1366623A2320154C00ADADCB /* Preview Content */ = {
-			isa = PBXGroup;
-			children = (
-				1366623B2320154C00ADADCB /* Preview Assets.xcassets */,
-			);
-			path = "Preview Content";
 			sourceTree = "<group>";
 		};
 		1366624423201D0A00ADADCB /* Shared */ = {
@@ -543,13 +538,14 @@
 		13666247232022D700ADADCB /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				1335BE7823C4F08F000C66E7 /* Error */,
 				13C7DEFC239C1F12001BAAF0 /* MediaItem.swift */,
 				1366624F23204CDD00ADADCB /* Movie.swift */,
-				13D0B88A23CB8A7100879687 /* Show */,
-				13C7DEFF239C23CC001BAAF0 /* Torrents */,
 				13666248232022E800ADADCB /* SearchResult.swift */,
+				13D0B88A23CB8A7100879687 /* Show */,
 				1309DD3F23C37150008EECB3 /* Subtitle.swift */,
-				1335BE7823C4F08F000C66E7 /* Error */,
+				13C7DEFF239C23CC001BAAF0 /* Torrents */,
+				1377F742242DDF6B00924074 /* TraktSearchResult.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -569,8 +565,9 @@
 			isa = PBXGroup;
 			children = (
 				136A5B7923A2BC5500BC0D06 /* MovieCollectionViewCell.swift */,
-				1342BE5823AFBA08003A5D00 /* TorrentTableViewCell.swift */,
+				1377F745242DE9F800924074 /* SearchResultCollectionViewCell.swift */,
 				1305BDE123CF7B9D0019D365 /* SeasonTableViewCell.swift */,
+				1342BE5823AFBA08003A5D00 /* TorrentTableViewCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -800,7 +797,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				1366623F2320154C00ADADCB /* LaunchScreen.storyboard in Resources */,
-				1366623C2320154C00ADADCB /* Preview Assets.xcassets in Resources */,
 				136662392320154C00ADADCB /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -897,6 +893,7 @@
 				13426D4722FA9CA000974C93 /* AppDelegate.swift in Sources */,
 				13C7DF11239C377F001BAAF0 /* MagnetLinker.swift in Sources */,
 				13C7DF07239C29EF001BAAF0 /* YTSTorrent.swift in Sources */,
+				1377F746242DE9F800924074 /* SearchResultCollectionViewCell.swift in Sources */,
 				13C7DEFA239C1E9B001BAAF0 /* EZTVService.swift in Sources */,
 				13C7DEFD239C1F12001BAAF0 /* MediaItem.swift in Sources */,
 				13C7DF0E239C35E6001BAAF0 /* CancelBag.swift in Sources */,
@@ -910,6 +907,7 @@
 				1305BDE423CF7FF80019D365 /* Episode.swift in Sources */,
 				13A8895023D8A1D600AD935A /* SubtitleSettings.swift in Sources */,
 				13426D4E22FA9CA000974C93 /* ContentView.swift in Sources */,
+				1377F743242DDF6B00924074 /* TraktSearchResult.swift in Sources */,
 				135AA65F2322BD4400BA4B4D /* MovieDetailView.swift in Sources */,
 				1366624D2320351000ADADCB /* TraktvService.swift in Sources */,
 				13666249232022E800ADADCB /* SearchResult.swift in Sources */,
@@ -965,12 +963,14 @@
 				1342BE4923AD6A02003A5D00 /* PlayerViewController.swift in Sources */,
 				1342BE6123B10BE4003A5D00 /* ProgressBar.swift in Sources */,
 				13C7DEFE239C1F12001BAAF0 /* MediaItem.swift in Sources */,
+				1377F744242DDF6B00924074 /* TraktSearchResult.swift in Sources */,
 				13C7DF08239C29EF001BAAF0 /* YTSTorrent.swift in Sources */,
 				13636CCC23942C0A0025215E /* ArrayExtension.swift in Sources */,
 				13636CC6239425F70025215E /* SearchView.swift in Sources */,
 				13A8895623D8AF3400AD935A /* SiriRemoteGestureRecognizer.swift in Sources */,
 				1342BE5723AFB8C2003A5D00 /* SettingsViewController.swift in Sources */,
 				13A8896023D8D7CB00AD935A /* PlayerLoadingView.swift in Sources */,
+				1377F747242DE9F800924074 /* SearchResultCollectionViewCell.swift in Sources */,
 				1364549C23A0F1C9001A15EC /* ShowsViewController.swift in Sources */,
 				13148A9A23C90E4E00EC0DC3 /* ShowDetailViewController.swift in Sources */,
 				1309DD3A23BE6D2D008EECB3 /* SubtitlesService.swift in Sources */,
@@ -1191,7 +1191,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_ASSET_PATHS = "\"homeflixtvos/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "";
 				DEVELOPMENT_TEAM = 6H6W45P449;
 				ENABLE_PREVIEWS = YES;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -1225,7 +1225,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_ASSET_PATHS = "\"homeflixtvos/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "";
 				DEVELOPMENT_TEAM = 6H6W45P449;
 				ENABLE_PREVIEWS = YES;
 				HEADER_SEARCH_PATHS = (

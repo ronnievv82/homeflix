@@ -40,6 +40,7 @@ final class TraktvService {
         return URLSession.shared.dataTaskPublisher(for: request(path: "/shows/\(show.id)/seasons?extended=full"))
         .map { $0.data }
         .decode(type: [Season].self, decoder: JSONDecoder())
+        .map { $0.filter { $0.number > 0 }}
         .mapError { error -> Error in
             print(error)
             return error

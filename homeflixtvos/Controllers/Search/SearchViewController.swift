@@ -81,7 +81,10 @@ extension SearchResultViewController: UICollectionViewDelegateFlowLayout {
                 let detailVM = MovieDetailViewModel(movie: movie)
                 let detailVC = MovieDetailViewController(viewModel: detailVM)
                 present(detailVC, animated: true, completion: nil)
-            case .show: break
+            case .show:
+                let show = Show(searchResult: result)
+                let detailVC = ShowDetailViewController(show: show)
+                present(detailVC, animated: true, completion: nil)
         }
     }
 }

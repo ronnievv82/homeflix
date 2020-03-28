@@ -23,11 +23,30 @@ final class SearchResultCollectionViewCell: UICollectionViewCell {
                 return
             }
 
-            titleLabel.text = result.title
-            TMDBService.getBackdropFor(mediaType: result.type == .movie ? .movie : .tv, tmdb: "\(result.tmdbID!)")
+            if let year = result.year {
+                titleLabel.text = result.title + " (\(year))"
+            } else {
+                titleLabel.text = result.title
+            }
+
+            guard let tmdb = result.tmdbID else {
+                imageView.image = placeholder
+                return
+            }
+
+            let type: TMDBService.MediaType = result.type == .movie ? .movie : .tv
+            TMDBService.getBackdropFor(mediaType: type, tmdb: "\(tmdb)")
                 .receive(on: DispatchQueue.main)
                 .sink { [weak self] url in
-                    self?.imageView.kf.setImage(with: url, options: [.backgroundDecode])
+                    if let url = url {
+                        self?.imageView.kf.setImage(with: url, placeholder: self?.placeholder, options: [.backgroundDecode])
+                    } else {
+                        TMDBService.getPosterFor(mediaType: type, tmdb: "\(tmdb)")
+                            .receive(on: DispatchQueue.main)
+                            .sink { [weak self] url in
+                                self?.imageView.kf.setImage(with: url, placeholder: self?.placeholder, options: [.backgroundDecode])
+                            }.store(in: &self!.bag)
+                    }
                 }.store(in: &bag)
         }
     }
@@ -36,7 +55,7 @@ final class SearchResultCollectionViewCell: UICollectionViewCell {
     // MARK: - Private properties
 
     private lazy var bag: Set<AnyCancellable> = Set()
-    private lazy var placeholder: UIImage = UIImage(imageLiteralResourceName: "poster")
+    private lazy var placeholder: UIImage = UIImage(named: "poster")!
 
     // MARK: - Lifecycle
 
@@ -49,23 +68,20 @@ final class SearchResultCollectionViewCell: UICollectionViewCell {
 
     override func prepareForReuse() {
         super.prepareForReuse()
-        imageView.kf.cancelDownloadTask()
-        imageView.image = placeholder
+        searchResult = nil
     }
 
     private lazy var imageView: UIImageView = {
         let view = UIImageView(image: placeholder)
         view.contentMode = .scaleAspectFill
-        view.layer.cornerRadius = 12
-        view.backgroundColor = .black
+        view.backgroundColor = .clear
         view.adjustsImageWhenAncestorFocused = true
-        view.layer.cornerRadius = 8
         return view
     }()
 
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.preferredFont(forTextStyle: .caption2)
+        label.font = UIFont.preferredFont(forTextStyle: .body)
         label.textAlignment = .center
         return label
     }()
@@ -73,14 +89,17 @@ final class SearchResultCollectionViewCell: UICollectionViewCell {
 
 private extension SearchResultCollectionViewCell {
     func setupAppearance() {
-        clipsToBounds = false
         addSubview(imageView)
         addSubview(titleLabel)
 
-        imageView.snp.makeConstraints { $0.edges.equalToSuperview() }
+        imageView.snp.makeConstraints {
+            $0.leading.trailing.top.equalToSuperview()
+            $0.bottom.equalTo(titleLabel.snp.top).offset(-20)
+        }
 
         titleLabel.snp.makeConstraints {
             $0.leading.trailing.bottom.equalToSuperview()
+            $0.height.greaterThanOrEqualTo(20)
         }
     }
 }

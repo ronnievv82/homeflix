@@ -74,7 +74,6 @@
 		136A5B8723A3872F00BC0D06 /* MovieDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 136A5B8623A3872F00BC0D06 /* MovieDetailViewModel.swift */; };
 		1377F743242DDF6B00924074 /* TraktSearchResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1377F742242DDF6B00924074 /* TraktSearchResult.swift */; };
 		1377F744242DDF6B00924074 /* TraktSearchResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1377F742242DDF6B00924074 /* TraktSearchResult.swift */; };
-		1377F746242DE9F800924074 /* SearchResultCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1377F745242DE9F800924074 /* SearchResultCollectionViewCell.swift */; };
 		1377F747242DE9F800924074 /* SearchResultCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1377F745242DE9F800924074 /* SearchResultCollectionViewCell.swift */; };
 		13A8894E23D8A15600AD935A /* VLCMediaPlayerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13A8894D23D8A15600AD935A /* VLCMediaPlayerExtension.swift */; };
 		13A8895023D8A1D600AD935A /* SubtitleSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13A8894F23D8A1D600AD935A /* SubtitleSettings.swift */; };
@@ -893,7 +892,6 @@
 				13426D4722FA9CA000974C93 /* AppDelegate.swift in Sources */,
 				13C7DF11239C377F001BAAF0 /* MagnetLinker.swift in Sources */,
 				13C7DF07239C29EF001BAAF0 /* YTSTorrent.swift in Sources */,
-				1377F746242DE9F800924074 /* SearchResultCollectionViewCell.swift in Sources */,
 				13C7DEFA239C1E9B001BAAF0 /* EZTVService.swift in Sources */,
 				13C7DEFD239C1F12001BAAF0 /* MediaItem.swift in Sources */,
 				13C7DF0E239C35E6001BAAF0 /* CancelBag.swift in Sources */,

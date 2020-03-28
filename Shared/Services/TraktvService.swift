@@ -40,6 +40,10 @@ final class TraktvService {
         return URLSession.shared.dataTaskPublisher(for: request(path: "/shows/\(show.id)/seasons?extended=full"))
         .map { $0.data }
         .decode(type: [Season].self, decoder: JSONDecoder())
+        .mapError { error -> Error in
+            print(error)
+            return error
+        }
         .replaceError(with: [])
         .eraseToAnyPublisher()
     }
@@ -48,6 +52,10 @@ final class TraktvService {
         return URLSession.shared.dataTaskPublisher(for: request(path: "/shows/\(show.id)/seasons/\(season.number)/episodes"))
         .map { $0.data }
         .decode(type: [Episode].self, decoder: JSONDecoder())
+        .mapError { error -> Error in
+            print(error)
+            return error
+        }
         .replaceError(with: [])
         .eraseToAnyPublisher()
     }
@@ -56,6 +64,10 @@ final class TraktvService {
         return URLSession.shared.dataTaskPublisher(for: request(path: "/search/movie,show?query=\(query)"))
             .map { $0.data }
             .decode(type: [TraktSearchResult].self, decoder: JSONDecoder())
+            .mapError { error -> Error in
+                print(error)
+                return error
+            }
             .replaceError(with: [])
             .eraseToAnyPublisher()
     }

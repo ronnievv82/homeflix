@@ -41,7 +41,7 @@ final class SearchResultViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        view.backgroundColor = .red
+        view.backgroundColor = .clear
         view.addSubview(collectionView)
         collectionView.snp.makeConstraints { (make) in
             make.edges.equalToSuperview()
@@ -70,7 +70,19 @@ final class SearchResultViewController: UIViewController {
 extension SearchResultViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let viableWidth = collectionView.bounds.width - 160 - 2 * 80
-        return CGSize(width: viableWidth / 3, height: 300)
+        return CGSize(width: viableWidth / 3, height: 350)
+    }
+
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let result = results[indexPath.item]
+        switch result.type {
+            case .movie:
+                let movie = Movie(searchResult: result)
+                let detailVM = MovieDetailViewModel(movie: movie)
+                let detailVC = MovieDetailViewController(viewModel: detailVM)
+                present(detailVC, animated: true, completion: nil)
+            case .show: break
+        }
     }
 }
 

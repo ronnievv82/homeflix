@@ -14,7 +14,7 @@ final class EZTVService {
     private static let base: String = "https://eztv.io/api"
 
     static func torrents(item: MediaItem) -> AnyPublisher<[EZTVTorrent], Never> {
-        let id: String = item.imdbID.replacingOccurrences(of: "tt", with: "")
+        let id: String = item.imdbID?.replacingOccurrences(of: "tt", with: "") ?? ""
         let path: String = "/get-torrents?imdb_id=\(id)"
         return URLSession.shared.dataTaskPublisher(for: request(path: path))
             .map { $0.data }

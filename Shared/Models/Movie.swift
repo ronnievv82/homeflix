@@ -30,4 +30,10 @@ final class Movie: MediaItem, Decodable {
         let tmdbID = "\(tmdbIDInt)"
         super.init(id: id, name: name, imdbID: imdbID, tmdbID: tmdbID, year: year)
     }
+
+    init(searchResult: TraktSearchResult) {
+        super.init(id: searchResult.id, name: searchResult.title,
+                   imdbID: searchResult.imdbID, tmdbID: searchResult.tmdbID,
+                   year: searchResult.year)
+    }
 }

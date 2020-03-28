@@ -12,12 +12,12 @@ class MediaItem {
     // MARK: - Public properties
     let id: String
     let name: String
-    let imdbID: String
-    let tmdbID: String
-    let year: String
+    let imdbID: String?
+    let tmdbID: String?
+    let year: String?
 
     // MARK: - Lifecycle
-    init(id: String, name: String, imdbID: String, tmdbID: String, year: String) {
+    init(id: String, name: String, imdbID: String?, tmdbID: String?, year: String?) {
         self.id = id
         self.name = name
         self.imdbID = imdbID

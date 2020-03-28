@@ -17,13 +17,13 @@ struct TraktSearchResult: Decodable {
 
     // MARK: - Public properties
 
-    let id: Int
+    let id: String
     let imdbID: String?
-    let tmdbID: Int?
+    let tmdbID: String?
 
     let type: ResultType
     let title: String
-    let year: Int
+    let year: String?
 
     private enum Keys: CodingKey {
         case type
@@ -48,11 +48,21 @@ struct TraktSearchResult: Decodable {
         }
 
         title = try typeContainer.decode(String.self, forKey: .title)
-        year = try typeContainer.decode(Int.self, forKey: .year)
+        if let yearInt = try typeContainer.decodeIfPresent(Int.self, forKey: .year) {
+            year = "\(yearInt)"
+        } else {
+            year = nil
+        }
 
         let idsContainer = try typeContainer.nestedContainer(keyedBy: Keys.self, forKey: .ids)
-        id = try idsContainer.decode(Int.self, forKey: .trakt)
+        let id = try idsContainer.decode(Int.self, forKey: .trakt)
+        self.id = "\(id)"
+
         imdbID = try idsContainer.decodeIfPresent(String.self, forKey: .imdb)
-        tmdbID = try idsContainer.decodeIfPresent(Int.self, forKey: .tmdb)
+        if let tmdbID = try idsContainer.decodeIfPresent(Int.self, forKey: .tmdb) {
+            self.tmdbID = "\(tmdbID)"
+        } else {
+            tmdbID = nil
+        }
     }
 }

@@ -49,11 +49,13 @@ final class MovieCollectionViewCell: UICollectionViewCell {
 
     func update(media: MediaItem) {
         titleLabel.text = media.name
-        TMDBService.getPosterFor(mediaType: media is Movie ? .movie : .tv, tmdb: media.tmdbID)
-            .receive(on: DispatchQueue.main)
-            .sink { [weak self] url in
-                self?.imageView.kf.setImage(with: url, options: [.backgroundDecode])
+        if let tmdb = media.tmdbID {
+            TMDBService.getPosterFor(mediaType: media is Movie ? .movie : .tv, tmdb: tmdb)
+                .receive(on: DispatchQueue.main)
+                .sink { [weak self] url in
+                    self?.imageView.kf.setImage(with: url, options: [.backgroundDecode])
             }.dispose(bag)
+        }
     }
 }
 

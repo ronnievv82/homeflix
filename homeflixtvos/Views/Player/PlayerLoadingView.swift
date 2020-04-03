@@ -6,15 +6,25 @@
 //  Copyright © 2020 MartinPucik. All rights reserved.
 //
 
+import Foundation
 import UIKit
+import PopcornTorrent
 
 final class PlayerLoadingView: UIView {
+    var status: PTTorrentStatus? {
+        didSet {
+            update()
+        }
+    }
+
     // MARK: - Private properties
     private let media: MediaItem
+    private let streamer: PTTorrentStreamer
 
     // MARK: - Lifecycle
-    init(media: MediaItem) {
+    init(media: MediaItem, streamer: PTTorrentStreamer) {
         self.media = media
+        self.streamer = streamer
         super.init(frame: .zero)
         setupAppearance()
         setupConstraints()
@@ -65,5 +75,16 @@ private extension PlayerLoadingView {
             make.centerX.equalToSuperview()
             make.bottom.equalTo(activity.snp.top).offset(-24)
         }
+    }
+
+    func update() {
+        guard let status = status else { return }
+        print("asdasdad")
+        let per = Int(status.bufferingProgress * 100)
+        let down = streamer.totalDownloaded.longLongValue
+        let totalDown = ByteCountFormatter.string(fromByteCount: down, countStyle: .decimal)
+        let up = streamer.totalUploaded.longLongValue
+        let totalUp = ByteCountFormatter.string(fromByteCount: up, countStyle: .decimal)
+        statusLabel.text = "Loading: \(per)% - D: \(totalDown) | U: \(totalUp)"
     }
 }

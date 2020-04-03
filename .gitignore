@@ -18,6 +18,11 @@ DerivedData/
 xcuserdata/
 .DS_Store
 
+## Don't include libtorrent source files
+Libraries/libtorrent/torrent
+Libraries/libtorrent/boost
+Libraries/libtorrent/include
+
 ## Other
 *.moved-aside
 *.xccheckout

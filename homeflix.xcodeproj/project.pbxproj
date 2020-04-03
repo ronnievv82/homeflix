@@ -40,6 +40,8 @@
 		1342BE5923AFBA08003A5D00 /* TorrentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1342BE5823AFBA08003A5D00 /* TorrentTableViewCell.swift */; };
 		1342BE6023B10BE4003A5D00 /* BufferingBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1342BE5E23B10BE4003A5D00 /* BufferingBar.swift */; };
 		1342BE6123B10BE4003A5D00 /* ProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1342BE5F23B10BE4003A5D00 /* ProgressBar.swift */; };
+		13572B2A2437097700322109 /* libtorrent_tvos.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 13572B292437095B00322109 /* libtorrent_tvos.framework */; };
+		13572B2B2437097700322109 /* libtorrent_tvos.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 13572B292437095B00322109 /* libtorrent_tvos.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		135AA65F2322BD4400BA4B4D /* MovieDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 135AA65E2322BD4400BA4B4D /* MovieDetailView.swift */; };
 		135AA6612323C56A00BA4B4D /* Parser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 135AA6602323C56A00BA4B4D /* Parser.swift */; };
 		13634B9A239D3C9D00379093 /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 13634B99239D3C7900379093 /* libc++.tbd */; };
@@ -119,6 +121,30 @@
 		4FB1DE420DB24F8E60C2E495 /* Pods_homeflixtvos.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 06152BF63C2A4A0B6C85CFF3 /* Pods_homeflixtvos.framework */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		13572B282437095B00322109 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 13572B242437095A00322109 /* libtorrent-tvos.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 13572B11243707FB00322109;
+			remoteInfo = "libtorrent-tvos";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		1357841B2436613000322109 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				13572B2B2437097700322109 /* libtorrent_tvos.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		06152BF63C2A4A0B6C85CFF3 /* Pods_homeflixtvos.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_homeflixtvos.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1305BDE123CF7B9D0019D365 /* SeasonTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeasonTableViewCell.swift; sourceTree = "<group>"; };
@@ -151,6 +177,20 @@
 		1342BE5823AFBA08003A5D00 /* TorrentTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TorrentTableViewCell.swift; sourceTree = "<group>"; };
 		1342BE5E23B10BE4003A5D00 /* BufferingBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BufferingBar.swift; sourceTree = "<group>"; };
 		1342BE5F23B10BE4003A5D00 /* ProgressBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgressBar.swift; sourceTree = "<group>"; };
+		134C19892433A52300D01B35 /* homeflix-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "homeflix-Bridging-Header.h"; sourceTree = "<group>"; };
+		134C198A2433A52300D01B35 /* PTTorrentDownloadManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PTTorrentDownloadManager.m; sourceTree = "<group>"; };
+		134C198B2433A52300D01B35 /* PTTorrentDownloadManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PTTorrentDownloadManager.h; sourceTree = "<group>"; };
+		134C198C2433A52400D01B35 /* PTTorrentStreamer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PTTorrentStreamer.h; sourceTree = "<group>"; };
+		134C198D2433A52400D01B35 /* PTTorrentStatus.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PTTorrentStatus.h; sourceTree = "<group>"; };
+		134C198E2433A52400D01B35 /* PTSize.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PTSize.m; sourceTree = "<group>"; };
+		134C198F2433A52400D01B35 /* PTSize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PTSize.h; sourceTree = "<group>"; };
+		134C19902433A52400D01B35 /* PTTorrentDownloadStatus.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PTTorrentDownloadStatus.h; sourceTree = "<group>"; };
+		134C19912433A52400D01B35 /* PTTorrentDownload.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = PTTorrentDownload.mm; sourceTree = "<group>"; };
+		134C19922433A52400D01B35 /* PTTorrentStreamer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = PTTorrentStreamer.mm; sourceTree = "<group>"; };
+		134C19932433A52400D01B35 /* PTTorrentStreamer+Protected.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "PTTorrentStreamer+Protected.h"; sourceTree = "<group>"; };
+		134C19942433A52500D01B35 /* PTTorrentDownloadManagerListener.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PTTorrentDownloadManagerListener.h; sourceTree = "<group>"; };
+		134C19952433A52500D01B35 /* PTTorrentDownload.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PTTorrentDownload.h; sourceTree = "<group>"; };
+		13572B242437095A00322109 /* libtorrent-tvos.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = "libtorrent-tvos.xcodeproj"; sourceTree = "<group>"; };
 		135AA65E2322BD4400BA4B4D /* MovieDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailView.swift; sourceTree = "<group>"; };
 		135AA6602323C56A00BA4B4D /* Parser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Parser.swift; sourceTree = "<group>"; };
 		13634B99239D3C7900379093 /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS13.2.sdk/usr/lib/libc++.tbd"; sourceTree = DEVELOPER_DIR; };
@@ -234,6 +274,7 @@
 				1364549F23A0F861001A15EC /* SnapKit in Frameworks */,
 				4FB1DE420DB24F8E60C2E495 /* Pods_homeflixtvos.framework in Frameworks */,
 				13B6C4E3241BFE05004B9DB8 /* MPUtils in Frameworks */,
+				13572B2A2437097700322109 /* libtorrent_tvos.framework in Frameworks */,
 				13636CB92392E6970025215E /* SwiftSoup in Frameworks */,
 				136A5B7F23A2D66000BC0D06 /* Kingfisher in Frameworks */,
 			);
@@ -313,9 +354,10 @@
 				1366624423201D0A00ADADCB /* Shared */,
 				13426D4522FA9CA000974C93 /* homeflix */,
 				136662332320154B00ADADCB /* homeflixtvos */,
-				13426D4422FA9CA000974C93 /* Products */,
+				13577FD9243632C800322109 /* Libraries */,
 				132E490B23219CC600A4864E /* Frameworks */,
 				B83C12FBF7A32AADCAC2C97A /* Pods */,
+				13426D4422FA9CA000974C93 /* Products */,
 			);
 			sourceTree = "<group>";
 		};
@@ -384,6 +426,50 @@
 				1342BE5F23B10BE4003A5D00 /* ProgressBar.swift */,
 			);
 			path = "Progress View";
+			sourceTree = "<group>";
+		};
+		134C19862433A50000D01B35 /* TStreamer */ = {
+			isa = PBXGroup;
+			children = (
+				134C198F2433A52400D01B35 /* PTSize.h */,
+				134C198E2433A52400D01B35 /* PTSize.m */,
+				134C19952433A52500D01B35 /* PTTorrentDownload.h */,
+				134C19912433A52400D01B35 /* PTTorrentDownload.mm */,
+				134C198B2433A52300D01B35 /* PTTorrentDownloadManager.h */,
+				134C198A2433A52300D01B35 /* PTTorrentDownloadManager.m */,
+				134C19942433A52500D01B35 /* PTTorrentDownloadManagerListener.h */,
+				134C19902433A52400D01B35 /* PTTorrentDownloadStatus.h */,
+				134C198D2433A52400D01B35 /* PTTorrentStatus.h */,
+				134C198C2433A52400D01B35 /* PTTorrentStreamer.h */,
+				134C19922433A52400D01B35 /* PTTorrentStreamer.mm */,
+				134C19932433A52400D01B35 /* PTTorrentStreamer+Protected.h */,
+				134C19892433A52300D01B35 /* homeflix-Bridging-Header.h */,
+			);
+			path = TStreamer;
+			sourceTree = "<group>";
+		};
+		13572B252437095A00322109 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				13572B292437095B00322109 /* libtorrent_tvos.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		13577FD9243632C800322109 /* Libraries */ = {
+			isa = PBXGroup;
+			children = (
+				13577FDA243632C800322109 /* libtorrent */,
+			);
+			path = Libraries;
+			sourceTree = "<group>";
+		};
+		13577FDA243632C800322109 /* libtorrent */ = {
+			isa = PBXGroup;
+			children = (
+				13572B242437095A00322109 /* libtorrent-tvos.xcodeproj */,
+			);
+			path = libtorrent;
 			sourceTree = "<group>";
 		};
 		135AA65D2322BCFF00BA4B4D /* Views */ = {
@@ -516,6 +602,7 @@
 		1366624423201D0A00ADADCB /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				134C19862433A50000D01B35 /* TStreamer */,
 				1366624B2320250900ADADCB /* Services */,
 				13666247232022D700ADADCB /* Models */,
 				1366624523201D1500ADADCB /* Parsers */,
@@ -718,6 +805,7 @@
 				1366622F2320154B00ADADCB /* Frameworks */,
 				136662302320154B00ADADCB /* Resources */,
 				682190389A81101BD4868E6F /* [CP] Embed Pods Frameworks */,
+				1357841B2436613000322109 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -747,6 +835,7 @@
 				TargetAttributes = {
 					13426D4222FA9CA000974C93 = {
 						CreatedOnToolsVersion = 11.0;
+						LastSwiftMigration = 1140;
 					};
 					136662312320154B00ADADCB = {
 						CreatedOnToolsVersion = 11.0;
@@ -771,6 +860,12 @@
 			);
 			productRefGroup = 13426D4422FA9CA000974C93 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 13572B252437095A00322109 /* Products */;
+					ProjectRef = 13572B242437095A00322109 /* libtorrent-tvos.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				13426D4222FA9CA000974C93 /* homeflix */,
@@ -778,6 +873,16 @@
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		13572B292437095B00322109 /* libtorrent_tvos.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = libtorrent_tvos.framework;
+			remoteRef = 13572B282437095B00322109 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		13426D4122FA9CA000974C93 /* Resources */ = {
@@ -1131,6 +1236,7 @@
 			baseConfigurationReference = 8B3629694056F96F4512D428 /* Pods-homeflix.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = homeflix/homeflix.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "-";
 				CODE_SIGN_STYLE = Manual;
@@ -1149,6 +1255,8 @@
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				"PROVISIONING_PROFILE_SPECIFIER[sdk=macosx*]" = "";
 				SUPPORTS_MACCATALYST = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "Shared/TStreamer/homeflix-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -1159,6 +1267,7 @@
 			baseConfigurationReference = 377D680C669F7B52FDDDFFE6 /* Pods-homeflix.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = homeflix/homeflix.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "-";
 				CODE_SIGN_STYLE = Manual;
@@ -1177,6 +1286,7 @@
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				"PROVISIONING_PROFILE_SPECIFIER[sdk=macosx*]" = "";
 				SUPPORTS_MACCATALYST = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "Shared/TStreamer/homeflix-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -1205,6 +1315,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				LIBRARY_SEARCH_PATHS = "${CONFIGURATION_BUILD_DIR}/libtorrent-cocoa-tvos.a";
 				PRODUCT_BUNDLE_IDENTIFIER = com.martinpucik.homeflixtvos;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1235,6 +1346,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				LIBRARY_SEARCH_PATHS = "${CONFIGURATION_BUILD_DIR}/libtorrent-cocoa-tvos.a";
 				PRODUCT_BUNDLE_IDENTIFIER = com.martinpucik.homeflixtvos;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";

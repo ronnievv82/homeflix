@@ -28,7 +28,9 @@ final class MediaPlayer: VLCMediaPlayer {
         (self as VLCFontAppearance).setTextRendererFont?(settings.font.fontName as NSString)
         let forceBold = settings.style == .bold || settings.style == .boldItalic
         (self as VLCFontAppearance).setTextRendererFontForceBold?(NSNumber(booleanLiteral: forceBold))
-        media.addOptions(["subsdec-encoding": settings.encoding])
+        if let media = media {
+            media.addOptions(["subsdec-encoding": settings.encoding])
+        }
     }
 
     func setEqualizerProfile(_ profile: EqualizerProfiles) {

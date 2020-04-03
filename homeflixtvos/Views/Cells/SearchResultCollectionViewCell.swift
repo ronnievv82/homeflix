@@ -51,7 +51,6 @@ final class SearchResultCollectionViewCell: UICollectionViewCell {
         }
     }
 
-
     // MARK: - Private properties
 
     private lazy var bag: Set<AnyCancellable> = Set()

@@ -19,9 +19,9 @@ xcuserdata/
 .DS_Store
 
 ## Don't include libtorrent source files
-Libraries/libtorrent/torrent
-Libraries/libtorrent/boost
-Libraries/libtorrent/include
+Libraries/TorrentStreamer/torrent
+Libraries/TorrentStreamer/boost
+Libraries/TorrentStreamer/include
 
 ## Other
 *.moved-aside

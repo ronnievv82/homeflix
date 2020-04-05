@@ -32,9 +32,7 @@ final class MoviesViewController: UIViewController {
         super.viewDidLoad()
 
         view.addSubview(collectionView)
-        collectionView.snp.makeConstraints { (make) in
-            make.edges.equalToSuperview().inset(40)
-        }
+        collectionView.snp.makeConstraints { $0.edges.equalToSuperview() }
 
         viewModel.$movies.sink { [weak self] mov in
             guard let self = self else { return }
@@ -55,8 +53,17 @@ final class MoviesViewController: UIViewController {
         }
     }()
 
+    private lazy var layout: UICollectionViewCompositionalLayout = {
+        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1/6), heightDimension: .fractionalWidth(1/6*1.5))
+        let groupItem = NSCollectionLayoutItem(layoutSize: itemSize)
+        let sectionSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .estimated(50))
+        let sectionGroup = NSCollectionLayoutGroup.horizontal(layoutSize: sectionSize, subitems: [groupItem])
+        let section = NSCollectionLayoutSection(group: sectionGroup)
+        return UICollectionViewCompositionalLayout(section: section)
+    }()
+
     private lazy var collectionView: UICollectionView = {
-        let view = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
+        let view = UICollectionView(frame: .zero, collectionViewLayout: layout)
         view.clipsToBounds = false
         view.delegate = self
         view.register(MovieCollectionViewCell.self, forCellWithReuseIdentifier: "myCell")
@@ -64,12 +71,9 @@ final class MoviesViewController: UIViewController {
     }()
 }
 
-extension MoviesViewController: UICollectionViewDelegateFlowLayout {
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let width = collectionView.frame.width / 7
-        return CGSize(width: width, height: width * 1.5)
-    }
+// MARK: - UICollectionViewDelegate
 
+extension MoviesViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let movie = viewModel.movies[indexPath.row]
         let vm = MovieDetailViewModel(movie: movie)

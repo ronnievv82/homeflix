@@ -40,8 +40,6 @@
 		1342BE5923AFBA08003A5D00 /* TorrentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1342BE5823AFBA08003A5D00 /* TorrentTableViewCell.swift */; };
 		1342BE6023B10BE4003A5D00 /* BufferingBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1342BE5E23B10BE4003A5D00 /* BufferingBar.swift */; };
 		1342BE6123B10BE4003A5D00 /* ProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1342BE5F23B10BE4003A5D00 /* ProgressBar.swift */; };
-		13572B2A2437097700322109 /* libtorrent_tvos.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 13572B292437095B00322109 /* libtorrent_tvos.framework */; };
-		13572B2B2437097700322109 /* libtorrent_tvos.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 13572B292437095B00322109 /* libtorrent_tvos.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		135AA65F2322BD4400BA4B4D /* MovieDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 135AA65E2322BD4400BA4B4D /* MovieDetailView.swift */; };
 		135AA6612323C56A00BA4B4D /* Parser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 135AA6602323C56A00BA4B4D /* Parser.swift */; };
 		13634B9A239D3C9D00379093 /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 13634B99239D3C7900379093 /* libc++.tbd */; };
@@ -77,6 +75,11 @@
 		1377F743242DDF6B00924074 /* TraktSearchResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1377F742242DDF6B00924074 /* TraktSearchResult.swift */; };
 		1377F744242DDF6B00924074 /* TraktSearchResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1377F742242DDF6B00924074 /* TraktSearchResult.swift */; };
 		1377F747242DE9F800924074 /* SearchResultCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1377F745242DE9F800924074 /* SearchResultCollectionViewCell.swift */; };
+		13A7CDA1243906E100C143FF /* TorrentStreamer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 13A7CA612439032400C143FF /* TorrentStreamer.framework */; };
+		13A7CDA2243906E100C143FF /* TorrentStreamer.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 13A7CA612439032400C143FF /* TorrentStreamer.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		13A7CE4A243A258500C143FF /* TVServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 13A7CE49243A258500C143FF /* TVServices.framework */; };
+		13A7CE4D243A258600C143FF /* ContentProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13A7CE4C243A258500C143FF /* ContentProvider.swift */; };
+		13A7CE51243A258600C143FF /* topshelf.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 13A7CE48243A258500C143FF /* topshelf.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		13A8894E23D8A15600AD935A /* VLCMediaPlayerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13A8894D23D8A15600AD935A /* VLCMediaPlayerExtension.swift */; };
 		13A8895023D8A1D600AD935A /* SubtitleSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13A8894F23D8A1D600AD935A /* SubtitleSettings.swift */; };
 		13A8895123D8A1D600AD935A /* SubtitleSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13A8894F23D8A1D600AD935A /* SubtitleSettings.swift */; };
@@ -122,12 +125,19 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		13572B282437095B00322109 /* PBXContainerItemProxy */ = {
+		13A7CA602439032400C143FF /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 13572B242437095A00322109 /* libtorrent-tvos.xcodeproj */;
+			containerPortal = 13A7CA5C2439032400C143FF /* TorrentStreamer.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = 13572B11243707FB00322109;
-			remoteInfo = "libtorrent-tvos";
+			remoteInfo = libtorrent;
+		};
+		13A7CE4F243A258600C143FF /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 13426D3B22FA9CA000974C93 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 13A7CE47243A258500C143FF;
+			remoteInfo = topshelf;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -138,9 +148,20 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				13572B2B2437097700322109 /* libtorrent_tvos.framework in Embed Frameworks */,
+				13A7CDA2243906E100C143FF /* TorrentStreamer.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		13A7CE55243A258600C143FF /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				13A7CE51243A258600C143FF /* topshelf.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
@@ -177,20 +198,6 @@
 		1342BE5823AFBA08003A5D00 /* TorrentTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TorrentTableViewCell.swift; sourceTree = "<group>"; };
 		1342BE5E23B10BE4003A5D00 /* BufferingBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BufferingBar.swift; sourceTree = "<group>"; };
 		1342BE5F23B10BE4003A5D00 /* ProgressBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgressBar.swift; sourceTree = "<group>"; };
-		134C19892433A52300D01B35 /* homeflix-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "homeflix-Bridging-Header.h"; sourceTree = "<group>"; };
-		134C198A2433A52300D01B35 /* PTTorrentDownloadManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PTTorrentDownloadManager.m; sourceTree = "<group>"; };
-		134C198B2433A52300D01B35 /* PTTorrentDownloadManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PTTorrentDownloadManager.h; sourceTree = "<group>"; };
-		134C198C2433A52400D01B35 /* PTTorrentStreamer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PTTorrentStreamer.h; sourceTree = "<group>"; };
-		134C198D2433A52400D01B35 /* PTTorrentStatus.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PTTorrentStatus.h; sourceTree = "<group>"; };
-		134C198E2433A52400D01B35 /* PTSize.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PTSize.m; sourceTree = "<group>"; };
-		134C198F2433A52400D01B35 /* PTSize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PTSize.h; sourceTree = "<group>"; };
-		134C19902433A52400D01B35 /* PTTorrentDownloadStatus.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PTTorrentDownloadStatus.h; sourceTree = "<group>"; };
-		134C19912433A52400D01B35 /* PTTorrentDownload.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = PTTorrentDownload.mm; sourceTree = "<group>"; };
-		134C19922433A52400D01B35 /* PTTorrentStreamer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = PTTorrentStreamer.mm; sourceTree = "<group>"; };
-		134C19932433A52400D01B35 /* PTTorrentStreamer+Protected.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "PTTorrentStreamer+Protected.h"; sourceTree = "<group>"; };
-		134C19942433A52500D01B35 /* PTTorrentDownloadManagerListener.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PTTorrentDownloadManagerListener.h; sourceTree = "<group>"; };
-		134C19952433A52500D01B35 /* PTTorrentDownload.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PTTorrentDownload.h; sourceTree = "<group>"; };
-		13572B242437095A00322109 /* libtorrent-tvos.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = "libtorrent-tvos.xcodeproj"; sourceTree = "<group>"; };
 		135AA65E2322BD4400BA4B4D /* MovieDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailView.swift; sourceTree = "<group>"; };
 		135AA6602323C56A00BA4B4D /* Parser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Parser.swift; sourceTree = "<group>"; };
 		13634B99239D3C7900379093 /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS13.2.sdk/usr/lib/libc++.tbd"; sourceTree = DEVELOPER_DIR; };
@@ -220,6 +227,11 @@
 		136A5B8623A3872F00BC0D06 /* MovieDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailViewModel.swift; sourceTree = "<group>"; };
 		1377F742242DDF6B00924074 /* TraktSearchResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TraktSearchResult.swift; sourceTree = "<group>"; };
 		1377F745242DE9F800924074 /* SearchResultCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultCollectionViewCell.swift; sourceTree = "<group>"; };
+		13A7CA5C2439032400C143FF /* TorrentStreamer.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = TorrentStreamer.xcodeproj; sourceTree = "<group>"; };
+		13A7CE48243A258500C143FF /* topshelf.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = topshelf.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		13A7CE49243A258500C143FF /* TVServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = TVServices.framework; path = Library/Frameworks/TVServices.framework; sourceTree = DEVELOPER_DIR; };
+		13A7CE4C243A258500C143FF /* ContentProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentProvider.swift; sourceTree = "<group>"; };
+		13A7CE4E243A258600C143FF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		13A8894D23D8A15600AD935A /* VLCMediaPlayerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VLCMediaPlayerExtension.swift; sourceTree = "<group>"; };
 		13A8894F23D8A1D600AD935A /* SubtitleSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubtitleSettings.swift; sourceTree = "<group>"; };
 		13A8895223D8A90500AD935A /* UIColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColorExtension.swift; sourceTree = "<group>"; };
@@ -274,9 +286,17 @@
 				1364549F23A0F861001A15EC /* SnapKit in Frameworks */,
 				4FB1DE420DB24F8E60C2E495 /* Pods_homeflixtvos.framework in Frameworks */,
 				13B6C4E3241BFE05004B9DB8 /* MPUtils in Frameworks */,
-				13572B2A2437097700322109 /* libtorrent_tvos.framework in Frameworks */,
 				13636CB92392E6970025215E /* SwiftSoup in Frameworks */,
+				13A7CDA1243906E100C143FF /* TorrentStreamer.framework in Frameworks */,
 				136A5B7F23A2D66000BC0D06 /* Kingfisher in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		13A7CE45243A258500C143FF /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				13A7CE4A243A258500C143FF /* TVServices.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -336,6 +356,7 @@
 				132E490C23219CC700A4864E /* SwiftUI.framework */,
 				84E541AACDA7FB11345F6A4A /* Pods_homeflix.framework */,
 				06152BF63C2A4A0B6C85CFF3 /* Pods_homeflixtvos.framework */,
+				13A7CE49243A258500C143FF /* TVServices.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -355,6 +376,7 @@
 				13426D4522FA9CA000974C93 /* homeflix */,
 				136662332320154B00ADADCB /* homeflixtvos */,
 				13577FD9243632C800322109 /* Libraries */,
+				13A7CE4B243A258500C143FF /* topshelf */,
 				132E490B23219CC600A4864E /* Frameworks */,
 				B83C12FBF7A32AADCAC2C97A /* Pods */,
 				13426D4422FA9CA000974C93 /* Products */,
@@ -366,6 +388,7 @@
 			children = (
 				13426D4322FA9CA000974C93 /* homeflix.app */,
 				136662322320154B00ADADCB /* homeflixtvos.app */,
+				13A7CE48243A258500C143FF /* topshelf.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -428,48 +451,12 @@
 			path = "Progress View";
 			sourceTree = "<group>";
 		};
-		134C19862433A50000D01B35 /* TStreamer */ = {
-			isa = PBXGroup;
-			children = (
-				134C198F2433A52400D01B35 /* PTSize.h */,
-				134C198E2433A52400D01B35 /* PTSize.m */,
-				134C19952433A52500D01B35 /* PTTorrentDownload.h */,
-				134C19912433A52400D01B35 /* PTTorrentDownload.mm */,
-				134C198B2433A52300D01B35 /* PTTorrentDownloadManager.h */,
-				134C198A2433A52300D01B35 /* PTTorrentDownloadManager.m */,
-				134C19942433A52500D01B35 /* PTTorrentDownloadManagerListener.h */,
-				134C19902433A52400D01B35 /* PTTorrentDownloadStatus.h */,
-				134C198D2433A52400D01B35 /* PTTorrentStatus.h */,
-				134C198C2433A52400D01B35 /* PTTorrentStreamer.h */,
-				134C19922433A52400D01B35 /* PTTorrentStreamer.mm */,
-				134C19932433A52400D01B35 /* PTTorrentStreamer+Protected.h */,
-				134C19892433A52300D01B35 /* homeflix-Bridging-Header.h */,
-			);
-			path = TStreamer;
-			sourceTree = "<group>";
-		};
-		13572B252437095A00322109 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				13572B292437095B00322109 /* libtorrent_tvos.framework */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 		13577FD9243632C800322109 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
-				13577FDA243632C800322109 /* libtorrent */,
+				13A7CA3D243901F300C143FF /* TorrentStreamer */,
 			);
 			path = Libraries;
-			sourceTree = "<group>";
-		};
-		13577FDA243632C800322109 /* libtorrent */ = {
-			isa = PBXGroup;
-			children = (
-				13572B242437095A00322109 /* libtorrent-tvos.xcodeproj */,
-			);
-			path = libtorrent;
 			sourceTree = "<group>";
 		};
 		135AA65D2322BCFF00BA4B4D /* Views */ = {
@@ -602,7 +589,6 @@
 		1366624423201D0A00ADADCB /* Shared */ = {
 			isa = PBXGroup;
 			children = (
-				134C19862433A50000D01B35 /* TStreamer */,
 				1366624B2320250900ADADCB /* Services */,
 				13666247232022D700ADADCB /* Models */,
 				1366624523201D1500ADADCB /* Parsers */,
@@ -665,6 +651,31 @@
 				136A5B8623A3872F00BC0D06 /* MovieDetailViewModel.swift */,
 			);
 			path = "Movie detail";
+			sourceTree = "<group>";
+		};
+		13A7CA3D243901F300C143FF /* TorrentStreamer */ = {
+			isa = PBXGroup;
+			children = (
+				13A7CA5C2439032400C143FF /* TorrentStreamer.xcodeproj */,
+			);
+			path = TorrentStreamer;
+			sourceTree = "<group>";
+		};
+		13A7CA5D2439032400C143FF /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				13A7CA612439032400C143FF /* TorrentStreamer.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		13A7CE4B243A258500C143FF /* topshelf */ = {
+			isa = PBXGroup;
+			children = (
+				13A7CE4C243A258500C143FF /* ContentProvider.swift */,
+				13A7CE4E243A258600C143FF /* Info.plist */,
+			);
+			path = topshelf;
 			sourceTree = "<group>";
 		};
 		13A8895723D8AF4000AD935A /* Utilities */ = {
@@ -780,7 +791,6 @@
 				13426D3F22FA9CA000974C93 /* Sources */,
 				13426D4022FA9CA000974C93 /* Frameworks */,
 				13426D4122FA9CA000974C93 /* Resources */,
-				78E5CCF76772B545B6B610AD /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -804,12 +814,13 @@
 				1366622E2320154B00ADADCB /* Sources */,
 				1366622F2320154B00ADADCB /* Frameworks */,
 				136662302320154B00ADADCB /* Resources */,
-				682190389A81101BD4868E6F /* [CP] Embed Pods Frameworks */,
 				1357841B2436613000322109 /* Embed Frameworks */,
+				13A7CE55243A258600C143FF /* Embed App Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				13A7CE50243A258600C143FF /* PBXTargetDependency */,
 			);
 			name = homeflixtvos;
 			packageProductDependencies = (
@@ -823,13 +834,30 @@
 			productReference = 136662322320154B00ADADCB /* homeflixtvos.app */;
 			productType = "com.apple.product-type.application";
 		};
+		13A7CE47243A258500C143FF /* topshelf */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 13A7CE52243A258600C143FF /* Build configuration list for PBXNativeTarget "topshelf" */;
+			buildPhases = (
+				13A7CE44243A258500C143FF /* Sources */,
+				13A7CE45243A258500C143FF /* Frameworks */,
+				13A7CE46243A258500C143FF /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = topshelf;
+			productName = topshelf;
+			productReference = 13A7CE48243A258500C143FF /* topshelf.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
 		13426D3B22FA9CA000974C93 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 1100;
+				LastSwiftUpdateCheck = 1140;
 				LastUpgradeCheck = 1100;
 				ORGANIZATIONNAME = MartinPucik;
 				TargetAttributes = {
@@ -839,6 +867,9 @@
 					};
 					136662312320154B00ADADCB = {
 						CreatedOnToolsVersion = 11.0;
+					};
+					13A7CE47243A258500C143FF = {
+						CreatedOnToolsVersion = 11.4;
 					};
 				};
 			};
@@ -862,24 +893,25 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
-					ProductGroup = 13572B252437095A00322109 /* Products */;
-					ProjectRef = 13572B242437095A00322109 /* libtorrent-tvos.xcodeproj */;
+					ProductGroup = 13A7CA5D2439032400C143FF /* Products */;
+					ProjectRef = 13A7CA5C2439032400C143FF /* TorrentStreamer.xcodeproj */;
 				},
 			);
 			projectRoot = "";
 			targets = (
 				13426D4222FA9CA000974C93 /* homeflix */,
 				136662312320154B00ADADCB /* homeflixtvos */,
+				13A7CE47243A258500C143FF /* topshelf */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		13572B292437095B00322109 /* libtorrent_tvos.framework */ = {
+		13A7CA612439032400C143FF /* TorrentStreamer.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
-			path = libtorrent_tvos.framework;
-			remoteRef = 13572B282437095B00322109 /* PBXContainerItemProxy */;
+			path = TorrentStreamer.framework;
+			remoteRef = 13A7CA602439032400C143FF /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
@@ -902,6 +934,13 @@
 			files = (
 				1366623F2320154C00ADADCB /* LaunchScreen.storyboard in Resources */,
 				136662392320154C00ADADCB /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		13A7CE46243A258500C143FF /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -950,40 +989,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		682190389A81101BD4868E6F /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-homeflixtvos/Pods-homeflixtvos-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-homeflixtvos/Pods-homeflixtvos-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-homeflixtvos/Pods-homeflixtvos-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		78E5CCF76772B545B6B610AD /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-homeflix/Pods-homeflix-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-homeflix/Pods-homeflix-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-homeflix/Pods-homeflix-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -1095,7 +1100,23 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		13A7CE44243A258500C143FF /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				13A7CE4D243A258600C143FF /* ContentProvider.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		13A7CE50243A258600C143FF /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 13A7CE47243A258500C143FF /* topshelf */;
+			targetProxy = 13A7CE4F243A258600C143FF /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		13426D5422FA9CA300974C93 /* LaunchScreen.storyboard */ = {
@@ -1296,6 +1317,8 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = A738BA092292C7D09B399B46 /* Pods-homeflixtvos.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ALWAYS_SEARCH_USER_PATHS = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
@@ -1331,6 +1354,8 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 469A117948D008941ADC9431 /* Pods-homeflixtvos.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ALWAYS_SEARCH_USER_PATHS = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
@@ -1355,6 +1380,50 @@
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 3;
 				TVOS_DEPLOYMENT_TARGET = 13.0;
+			};
+			name = Release;
+		};
+		13A7CE53243A258600C143FF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 6H6W45P449;
+				INFOPLIST_FILE = topshelf/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.martinpucik.homeflixtvos.topshelf;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = appletvos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 3;
+				TVOS_DEPLOYMENT_TARGET = 13.4;
+			};
+			name = Debug;
+		};
+		13A7CE54243A258600C143FF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 6H6W45P449;
+				INFOPLIST_FILE = topshelf/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.martinpucik.homeflixtvos.topshelf;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = appletvos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 3;
+				TVOS_DEPLOYMENT_TARGET = 13.4;
 			};
 			name = Release;
 		};
@@ -1384,6 +1453,15 @@
 			buildConfigurations = (
 				136662412320154C00ADADCB /* Debug */,
 				136662422320154C00ADADCB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		13A7CE52243A258600C143FF /* Build configuration list for PBXNativeTarget "topshelf" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				13A7CE53243A258600C143FF /* Debug */,
+				13A7CE54243A258600C143FF /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

@@ -13,3 +13,4 @@
 #endif /* homeflixtvos_Bridging_Header_h */
 
 #import <TVVLCKit/TVVLCKit.h>
+#import <TorrentStreamer/TorrentStreamer.h>

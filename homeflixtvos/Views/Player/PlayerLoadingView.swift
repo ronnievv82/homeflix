@@ -8,7 +8,6 @@
 
 import Foundation
 import UIKit
-import PopcornTorrent
 
 final class PlayerLoadingView: UIView {
     var status: PTTorrentStatus? {
@@ -79,7 +78,6 @@ private extension PlayerLoadingView {
 
     func update() {
         guard let status = status else { return }
-        print("asdasdad")
         let per = Int(status.bufferingProgress * 100)
         let down = streamer.totalDownloaded.longLongValue
         let totalDown = ByteCountFormatter.string(fromByteCount: down, countStyle: .decimal)

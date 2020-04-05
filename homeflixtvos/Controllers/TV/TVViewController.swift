@@ -14,6 +14,10 @@ import AVKit
 
 final class TVViewController: UIViewController {
 
+    enum Sections: CaseIterable {
+        case ct, prima
+    }
+
     struct Channel {
         let id: String
         let title: String
@@ -83,6 +87,24 @@ final class TVViewController: UIViewController {
         view.registerCell(UITableViewCell.self)
         return view
     }()
+
+    private lazy var collectionView: UICollectionView = {
+        let view = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
+        view.dataSource = self
+        return view
+    }()
+}
+
+extension TVViewController: UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        0
+    }
+
+    func numberOfSections(in tableView: UITableView) -> Int { Sections.allCases.count }
+
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        return UICollectionViewCell()
+    }
 }
 
 extension TVViewController: UITableViewDataSource {

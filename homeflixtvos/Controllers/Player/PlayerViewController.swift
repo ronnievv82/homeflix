@@ -8,7 +8,6 @@
 
 import UIKit
 import AVKit
-import PopcornTorrent
 import Combine
 import MediaPlayer
 
@@ -29,6 +28,7 @@ final class PlayerViewController: UIViewController {
     private var readyToPlay: Bool = false
 
     // MARK: - Lifecycle
+    
     init(torrent: Torrent, media: MediaItem) {
         self.torrent = torrent
         self.media = media
@@ -37,10 +37,9 @@ final class PlayerViewController: UIViewController {
         let magnet = MagnetLinker.magnet(torrent)
         streamer.startStreaming(fromMultiTorrentFileOrMagnetLink: magnet, progress: { [weak self] (status) in
             self?.updateProgress(status: status)
-//            self?.progressBar.bufferProgress = status.totalProgress
         }, readyToPlay: { [weak self] (url, fileUrl) in
             DispatchQueue.main.async {
-//                self?.play(url: url)
+                self?.play(url: fileUrl)
 //                self?.loadSubtitles(fileURL: fileUrl)
             }
         }, failure: { [weak self] (err) in
@@ -58,8 +57,8 @@ final class PlayerViewController: UIViewController {
     required init?(coder: NSCoder) { nil }
 
     deinit {
-//        mediaPlayer.delegate = nil
-//        mediaPlayer.stop()
+        mediaPlayer.delegate = nil
+        mediaPlayer.stop()
         streamer.cancelStreamingAndDeleteData(true)
     }
 
@@ -70,7 +69,7 @@ final class PlayerViewController: UIViewController {
 
     private lazy var playPauseRecognizer: SiriRemotePlayPauseGesture = {
         SiriRemotePlayPauseGesture { [weak self] in
-//            (self?.mediaPlayer.isPlaying ?? false) ? self?.mediaPlayer.pause() : self?.mediaPlayer.play()
+            (self?.mediaPlayer.isPlaying ?? false) ? self?.mediaPlayer.pause() : self?.mediaPlayer.play()
         }
     }()
 
@@ -94,12 +93,12 @@ final class PlayerViewController: UIViewController {
         return label
     }()
 
-//    private lazy var playerView: UIView = UIView()
-//    private lazy var mediaPlayer: MediaPlayer = MediaPlayer()
+    private lazy var playerView: UIView = UIView()
+    private lazy var mediaPlayer: MediaPlayer = MediaPlayer()
 //    private lazy var progressView: UIView = UIView()
 //    private lazy var progressBar: ProgressBar = ProgressBar(frame: .zero)
-//    private var infoView: PlayerInfoView?
-    private lazy var loadingView: PlayerLoadingView = PlayerLoadingView(media: media, streamer: streamer)
+    private var infoView: PlayerInfoView?
+    private var loadingView: PlayerLoadingView?// = PlayerLoadingView(media: media, streamer: streamer)
 }
 
 private extension PlayerViewController {
@@ -108,20 +107,15 @@ private extension PlayerViewController {
         view.addGestureRecognizer(swipeDownRecognizer)
         view.addGestureRecognizer(swipeUpRecognizer)
 
-        view.addSubview(loadingView)
-        loadingView.snp.makeConstraints { $0.edges.equalToSuperview() }
+        let loading = PlayerLoadingView(media: media, streamer: streamer)
+        view.addSubview(loading)
+        loading.snp.makeConstraints { $0.edges.equalToSuperview() }
+        self.loadingView = loading
 
-//        view.addSubview(playerView)
-//
 //        view.addSubview(progressView)
 //        progressView.addSubview(progressBar)
 //        progressView.addSubview(timeLabel)
 
-//        loadingContainer.snp.makeConstraints { $0.center.width.equalToSuperview() }
-
-//        playerView.alpha = 0
-//        playerView.snp.makeConstraints { $0.edges.equalToSuperview() }
-//
 //        progressView.alpha = 0
 //        progressView.snp.makeConstraints { $0.bottom.leading.trailing.equalToSuperview().inset(20) }
 //
@@ -147,16 +141,20 @@ private extension PlayerViewController {
     }
 
     func play(url: URL) {
-//        loadingContainer.alpha = 0
+        view.addSubview(playerView)
+        playerView.snp.makeConstraints { $0.edges.equalToSuperview() }
 
-//        try? AVAudioSession.sharedInstance().setCategory(.playback, mode: .moviePlayback)
-//        mediaPlayer.delegate = self
-//        mediaPlayer.drawable = playerView
-//        mediaPlayer.media = VLCMedia(url: url)
-//        mediaPlayer.play()
-//
+        try? AVAudioSession.sharedInstance().setCategory(.playback, mode: .moviePlayback)
+        mediaPlayer.delegate = self
+        mediaPlayer.drawable = playerView
+        mediaPlayer.media = VLCMedia(url: url)
+        mediaPlayer.play()
+
 //        playerView.alpha = 1
 //        progressBar.alpha = 1
+
+        loadingView?.removeFromSuperview()
+        loadingView = nil
     }
 
     func loadSubtitles(fileURL: URL?) {
@@ -166,18 +164,18 @@ private extension PlayerViewController {
     }
 
     @objc func swipeDownAction() {
-//        guard infoView == nil else { return }
-//        let info = PlayerInfoView()
-//        view.addSubview(info)
-//
-//        info.snp.makeConstraints { (make) in
-//            make.width.equalToSuperview().multipliedBy(0.8)
-//            make.height.equalToSuperview().multipliedBy(0.4)
-//            make.top.equalToSuperview().offset(20)
-//            make.centerX.equalToSuperview()
-//        }
-//
-//        infoView = info
+        guard infoView == nil else { return }
+        let info = PlayerInfoView()
+        view.addSubview(info)
+
+        info.snp.makeConstraints { (make) in
+            make.width.equalToSuperview().multipliedBy(0.8)
+            make.height.equalToSuperview().multipliedBy(0.4)
+            make.top.equalToSuperview().offset(20)
+            make.centerX.equalToSuperview()
+        }
+
+        infoView = info
     }
 
     @objc func swipeUpAction() {
@@ -216,17 +214,17 @@ private extension PlayerViewController {
 
 //        guard !progressBar.isScrubbing else {
 //            endScrubbing()
-//            if mediaPlayer.isSeekable {
+            if mediaPlayer.isSeekable {
 //                let time = NSNumber(value: progressBar.scrubbingProgress * streamDuration)
 //                mediaPlayer.time = VLCTime(number: time)
                 // Force a progress change rather than waiting for VLCKit's delegate call to.
 //                progressBar.progress = progressBar.scrubbingProgress
 //                progressBar.elapsedTimeLabel.text = progressBar.scrubbingTimeLabel.text
-//            }
+            }
 //            return
 //        }
 
-//        mediaPlayer.canPause ? mediaPlayer.pause() : ()
+        mediaPlayer.canPause ? mediaPlayer.pause() : ()
 //        progressBar.isHidden ? toggleControlsVisible() : ()
 //        dimmerView!.isHidden = false
 //        progressBar.isScrubbing = true
@@ -239,9 +237,10 @@ private extension PlayerViewController {
 
     func updateProgress(status: PTTorrentStatus) {
         if !readyToPlay {
-            loadingView.status = status
+            loadingView?.status = status
+        } else {
+//            progressBar.bufferProgress = status.totalProgress
         }
-//        
     }
 }
 
@@ -262,7 +261,6 @@ extension PlayerViewController: VLCMediaPlayerDelegate {
 //        progressBar.progress = mediaPlayer.position
 //        timeLabel.text = mediaPlayer.remainingTime.stringValue
     }
-    
 }
 
 extension PlayerViewController: UIGestureRecognizerDelegate {

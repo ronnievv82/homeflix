@@ -12,7 +12,6 @@ final class MediaPlayer: VLCMediaPlayer {
 
     override init() {
         super.init()
-
         audio.passthrough = true
         setupSubtitleAppearance()
         setEqualizerProfile(.fullDynamicRange)

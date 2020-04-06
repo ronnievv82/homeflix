@@ -45,12 +45,9 @@ final class MoviesViewController: UIViewController {
 
     private lazy var dataSource: UICollectionViewDiffableDataSource<Section, Movie> = {
         return UICollectionViewDiffableDataSource<Section, Movie>(collectionView: collectionView) { (collection, path, movie) -> UICollectionViewCell? in
-            if let cell = collection.dequeueReusableCell(forIndexPath: path) as? MovieCollectionViewCell {
-                cell.update(media: movie)
-                return cell
-            }
-
-            return nil
+            let cell = collection.dequeueReusableCell(forIndexPath: path) as MovieCollectionViewCell
+            cell.update(media: movie)
+            return cell
         }
     }()
 
@@ -67,7 +64,7 @@ final class MoviesViewController: UIViewController {
         let view = UICollectionView(frame: .zero, collectionViewLayout: layout)
         view.clipsToBounds = false
         view.delegate = self
-        view.register(MovieCollectionViewCell.self, forCellWithReuseIdentifier: "myCell")
+        view.registerCell(MovieCollectionViewCell.self)
         return view
     }()
 }

@@ -14,37 +14,15 @@ import AVKit
 
 final class TVViewController: UIViewController {
 
-    enum Sections: CaseIterable {
-        case ct, prima
-    }
-
-    struct Channel {
-        let id: String
-        let title: String
-        let previewImageUrl: String
-        let isVod: String
-    }
-
-    struct Playlist {
-        let main: String
-        let timeshift: String?
-    }
+    // MARK: - Private properties
 
     private let BASE_XML_URL = "https://www.ceskatelevize.cz"
     private var token: String = ""
     private lazy var bag: Set<AnyCancellable> = Set()
-    private lazy var channels: [Channel] = []
-    private var playlist: Playlist? {
-        didSet {
-            DispatchQueue.main.async {
-                let player = AVPlayer(url: URL(string: self.playlist!.main)!)
-                let cnt = AVPlayerViewController()
-                cnt.player = player
-                self.present(cnt, animated: true, completion: nil)
-                player.play()
-            }
-        }
-    }
+
+    private var sections: [TVStation: [TVChannel]] = [:]
+
+    // MARK: - Lifecycle
 
     init() {
         super.init(nibName: nil, bundle: nil)
@@ -56,20 +34,12 @@ final class TVViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        view.addSubview(tableView)
-        tableView.snp.makeConstraints { (make) in
-            make.edges.equalToSuperview()
-        }
+        view.addSubview(collectionView)
+        collectionView.snp.makeConstraints { $0.edges.equalTo(view.safeAreaLayoutGuide) }
 
         NotificationCenter.default.addObserver(self, selector: #selector(becameActive),
                                                name: UIApplication.didBecomeActiveNotification,
                                                object: nil)
-    }
-
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        self.channels = []
-        tableView.reloadData()
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -80,49 +50,61 @@ final class TVViewController: UIViewController {
         }).store(in: &bag)
     }
 
-    private lazy var tableView: UITableView = {
-        let view = UITableView(frame: .zero)
-        view.delegate = self
-        view.dataSource = self
-        view.registerCell(UITableViewCell.self)
-        return view
+    // MARK: - Private properties
+
+    private lazy var dataSource: UICollectionViewDiffableDataSource<TVStation, TVChannel> = {
+        let source = UICollectionViewDiffableDataSource<TVStation, TVChannel>(collectionView: collectionView) { (collection, path, channel) -> UICollectionViewCell? in
+            let cell = collection.dequeueReusableCell(forIndexPath: path) as ChannelCollectionViewCell
+            cell.channel = channel
+            return cell
+        }
+
+        source.supplementaryViewProvider = { (collection, kind, indexPath) -> UICollectionReusableView? in
+            let view = collection.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "header", for: indexPath)
+            if let header = view as? TVHeaderView {
+                header.tvStation = Array(self.sections.keys)[safe: indexPath.section]
+            }
+            return view
+        }
+        return source
+    }()
+
+    private lazy var layout: UICollectionViewCompositionalLayout = {
+        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1/4), heightDimension: .fractionalWidth(1/4*0.75))
+        let groupItem = NSCollectionLayoutItem(layoutSize: itemSize)
+        let sectionSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .estimated(50))
+        let sectionGroup = NSCollectionLayoutGroup.horizontal(layoutSize: sectionSize, subitems: [groupItem])
+        let section = NSCollectionLayoutSection(group: sectionGroup)
+
+        let sectionHeaderSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .estimated(50))
+        let sectionHeaderItem = NSCollectionLayoutBoundarySupplementaryItem(
+            layoutSize: sectionHeaderSize,
+            elementKind: UICollectionView.elementKindSectionHeader,
+            alignment: .topLeading)
+        section.boundarySupplementaryItems = [sectionHeaderItem]
+
+        return UICollectionViewCompositionalLayout(section: section)
     }()
 
     private lazy var collectionView: UICollectionView = {
-        let view = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
-        view.dataSource = self
+        let view = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        view.clipsToBounds = false
+        view.delegate = self
+        view.delaysContentTouches = false
+        view.registerCell(ChannelCollectionViewCell.self)
+        view.register(TVHeaderView.self,
+                      forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
+                      withReuseIdentifier: "header")
         return view
     }()
 }
 
-extension TVViewController: UICollectionViewDataSource {
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        0
-    }
-
-    func numberOfSections(in tableView: UITableView) -> Int { Sections.allCases.count }
-
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        return UICollectionViewCell()
-    }
-}
-
-extension TVViewController: UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return channels.count
-    }
-
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell: UITableViewCell = tableView.dequeueReusableCell(forIndexPath: indexPath)
-        cell.textLabel?.text = channels[indexPath.row].title
-        return cell
-    }
-}
-
-extension TVViewController: UITableViewDelegate {
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let channel = channels[indexPath.row]
-        getPlaylist(channel: channel)
+extension TVViewController: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if let section = Array(sections.keys)[safe: indexPath.section], section == .ceskaTelevize {
+            let channel = sections[section]?[indexPath.row]
+            getPlaylist(channel: channel!)
+        }
     }
 }
 
@@ -151,38 +133,34 @@ private extension TVViewController {
         URLSession.shared.dataTaskPublisher(for: req)
             .sink(receiveCompletion: { _ in }, receiveValue: { [weak self] (data, _) in
                 let xml = SWXMLHash.parse(data)
-                let channels = xml["programmes"].children.compactMap { child -> Channel? in
+
+                let channels = xml["programmes"].children.compactMap { child -> TVChannel? in
                     guard
-                        let id = child["live"]["programme"]["ID"].element?.text,
-                        !id.isEmpty,
-                        let title = child["live"]["programme"]["channelTitle"].element?.text,
-                        !title.isEmpty,
+                        let name = child["live"]["programme"]["channelTitle"].element?.text,
+                        !name.isEmpty,
                         let preview = child["live"]["programme"]["imageURL"].element?.text,
-                        let isVod = child["live"]["programme"]["isVod"].element?.text
+                        let isVod = child["live"]["programme"]["isVod"].element?.text,
+                        let title = child["live"]["programme"]["title"].element?.text
                     else {
                         return nil
                     }
-//                    print(child["live"]["programme"])
-//                    print("\n\n")
-                    return Channel(id: id, title: title, previewImageUrl: preview, isVod: isVod)
+                    return TVChannel(id: name, name: name, currentProgramme: TVProgramme(previewImageUrl: preview, title: title, isVod: isVod))
                 }
 
-                self?.channels = channels
-                DispatchQueue.main.async {
-                    self?.tableView.reloadData()
-                }
+                self?.sections[TVStation.ceskaTelevize] = channels
+                self?.reloadSnapshot()
             }).store(in: &bag)
     }
 
-    func getPlaylist(channel: Channel) {
+    func getPlaylist(channel: TVChannel) {
         var req2 = URLRequest(url: URL(string: "\(BASE_XML_URL)/services/ivysilani/xml/playlisturl/")!)
         req2.allHTTPHeaderFields = ["Content-type": "application/x-www-form-urlencoded",
                                     "Accept-encoding": "gzip",
                                     "Connection": "Keep-Alive",
                                     "User-Agent": "Dalvik/1.6.0 (Linux; U; Android 4.4.4; Nexus 7 Build/KTU84P)"]
         req2.httpMethod = "POST"
-        let quality: String = channel.isVod == "1" ? "max720p" : "web"
-        let playerType: String = channel.isVod == "1" ? "progressive" : "ios"
+        let quality: String = channel.currentProgramme.isVod == "1" ? "max720p" : "web"
+        let playerType: String = channel.currentProgramme.isVod == "1" ? "progressive" : "ios"
         let params = [
             "token": token,
             "ID": channel.id,
@@ -210,21 +188,40 @@ private extension TVViewController {
                     let arr = obj["playlist"] as? [[String: Any]],
                     let play = arr.first?["streamUrls"] as? [String: Any],
                     let main = play["main"] as? String {
-                    let time = play["timeshift"] as? String
-                    self?.playlist = Playlist(main: main, timeshift: time)
+
+                    self?.startStream(link: main)
                 }
             })
             .store(in: &bag)
     }
 
     @objc func becameActive() {
-        self.channels = []
-        self.tableView.reloadData()
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
             self.getToken().sink(receiveValue: { [weak self] (token) in
                 self?.token = token
                 self?.fetchPrograms()
             }).store(in: &self.bag)
+        }
+    }
+
+    func reloadSnapshot() {
+        var snapshot = NSDiffableDataSourceSnapshot<TVStation, TVChannel>()
+        for section in TVStation.allCases {
+            snapshot.appendSections([section])
+            snapshot.appendItems(sections[section] ?? [], toSection: section)
+        }
+        DispatchQueue.main.async {
+            self.dataSource.apply(snapshot, animatingDifferences: true, completion: nil)
+        }
+    }
+
+    func startStream(link: String) {
+        DispatchQueue.main.async {
+            let player = AVPlayer(url: URL(string: link)!)
+            let cnt = AVPlayerViewController()
+            cnt.player = player
+            self.present(cnt, animated: true, completion: nil)
+            player.play()
         }
     }
 }

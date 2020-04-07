@@ -14,7 +14,12 @@ final class ChannelCollectionViewCell: UICollectionViewCell {
     var channel: TVChannel? {
         didSet {
             if let channel = channel {
-                card.footerView?.titleLabel?.text = "\(channel.name) - \(channel.currentProgramme.title)"
+                if let programmeTitle = channel.currentProgramme.title, programmeTitle.isNotEmpty {
+                    card.footerView?.titleLabel?.text = "\(channel.name) - \(programmeTitle)"
+                } else {
+                    card.footerView?.titleLabel?.text = channel.name
+                }
+
                 if let preview = URL(string: channel.currentProgramme.previewImageUrl) {
                     imageView.kf.setImage(with: preview)
                 }
@@ -37,9 +42,14 @@ final class ChannelCollectionViewCell: UICollectionViewCell {
         super.prepareForReuse()
         channel = nil
     }
-    
+
+    override var preferredFocusEnvironments: [UIFocusEnvironment] {
+        return [card.contentView]
+    }
+
     private lazy var card: TVCardView = {
         let view = TVCardView()
+        view.contentViewInsets = NSDirectionalEdgeInsets(top: 0, leading: 0, bottom: -5, trailing: 0)
         view.contentView.addSubview(imageView)
         imageView.snp.makeConstraints { $0.edges.equalToSuperview() }
         view.footerView = TVLockupHeaderFooterView()

@@ -74,6 +74,7 @@
 		1377F747242DE9F800924074 /* SearchResultCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1377F745242DE9F800924074 /* SearchResultCollectionViewCell.swift */; };
 		139A1E0E243B942C00FCCC77 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 139A1E0D243B942C00FCCC77 /* Kingfisher */; };
 		139A1E0F243B942C00FCCC77 /* Kingfisher in Embed Frameworks */ = {isa = PBXBuildFile; productRef = 139A1E0D243B942C00FCCC77 /* Kingfisher */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		139A1E11243B9F0E00FCCC77 /* TVViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 139A1E10243B9F0E00FCCC77 /* TVViewModel.swift */; };
 		13A7CDA1243906E100C143FF /* TorrentStreamer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 13A7CA612439032400C143FF /* TorrentStreamer.framework */; };
 		13A7CDA2243906E100C143FF /* TorrentStreamer.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 13A7CA612439032400C143FF /* TorrentStreamer.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		13A7CE4A243A258500C143FF /* TVServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 13A7CE49243A258500C143FF /* TVServices.framework */; };
@@ -225,6 +226,7 @@
 		136A5B8623A3872F00BC0D06 /* MovieDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailViewModel.swift; sourceTree = "<group>"; };
 		1377F742242DDF6B00924074 /* TraktSearchResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TraktSearchResult.swift; sourceTree = "<group>"; };
 		1377F745242DE9F800924074 /* SearchResultCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultCollectionViewCell.swift; sourceTree = "<group>"; };
+		139A1E10243B9F0E00FCCC77 /* TVViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TVViewModel.swift; sourceTree = "<group>"; };
 		13A7CA5C2439032400C143FF /* TorrentStreamer.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = TorrentStreamer.xcodeproj; sourceTree = "<group>"; };
 		13A7CE48243A258500C143FF /* topshelf.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = topshelf.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		13A7CE49243A258500C143FF /* TVServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = TVServices.framework; path = Library/Frameworks/TVServices.framework; sourceTree = DEVELOPER_DIR; };
@@ -691,6 +693,7 @@
 			isa = PBXGroup;
 			children = (
 				13B6C2FE241B697D004B9DB8 /* TVViewController.swift */,
+				139A1E10243B9F0E00FCCC77 /* TVViewModel.swift */,
 			);
 			path = TV;
 			sourceTree = "<group>";
@@ -1049,6 +1052,7 @@
 				1377F744242DDF6B00924074 /* TraktSearchResult.swift in Sources */,
 				13C7DF08239C29EF001BAAF0 /* YTSTorrent.swift in Sources */,
 				13636CCC23942C0A0025215E /* ArrayExtension.swift in Sources */,
+				139A1E11243B9F0E00FCCC77 /* TVViewModel.swift in Sources */,
 				13A8895623D8AF3400AD935A /* SiriRemoteGestureRecognizer.swift in Sources */,
 				1342BE5723AFB8C2003A5D00 /* SettingsViewController.swift in Sources */,
 				13A8896023D8D7CB00AD935A /* PlayerLoadingView.swift in Sources */,

@@ -36,7 +36,7 @@ final class TVHeaderView: UICollectionReusableView {
 
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.preferredFont(forTextStyle: .headline)
+        label.font = UIFont.preferredFont(forTextStyle: .title3)
         return label
     }()
 }
@@ -45,7 +45,8 @@ private extension TVHeaderView {
     func setupAppearance() {
         addSubview(titleLabel)
         titleLabel.snp.makeConstraints { (make) in
-            make.edges.equalToSuperview()
+            make.leading.trailing.bottom.equalToSuperview()
+            make.top.equalToSuperview().inset(20)
         }
     }
 

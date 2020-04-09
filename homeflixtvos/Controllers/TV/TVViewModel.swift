@@ -85,6 +85,7 @@ private extension TVViewModel {
 
                 let channels = xml["programmes"].children.compactMap { child -> TVChannel? in
                     guard
+                        let id = child["live"]["programme"]["ID"].element?.text,
                         let name = child["live"]["programme"]["channelTitle"].element?.text,
                         !name.isEmpty,
                         let preview = child["live"]["programme"]["imageURL"].element?.text,
@@ -93,7 +94,8 @@ private extension TVViewModel {
                         else {
                             return nil
                     }
-                    return TVChannel(id: name, name: name, currentProgramme: TVProgramme(previewImageUrl: preview, title: title, isVod: isVod, streamLink: nil))
+                    let programme = TVProgramme(previewImageUrl: preview, title: title, isVod: isVod, streamLink: nil)
+                    return TVChannel(id: id, name: name, currentProgramme: programme)
                 }
 
                 self?.sections[.ceskaTelevize] = channels

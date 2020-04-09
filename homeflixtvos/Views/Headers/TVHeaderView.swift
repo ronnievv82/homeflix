@@ -16,7 +16,6 @@ final class TVHeaderView: UICollectionReusableView {
                 titleLabel.text = ""
                 return
             }
-
             titleLabel.text = station.name
         }
     }

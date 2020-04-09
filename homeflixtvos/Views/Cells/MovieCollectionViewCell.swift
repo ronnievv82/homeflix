@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import TVUIKit
 import Kingfisher
 import Combine
 
@@ -33,43 +34,41 @@ final class MovieCollectionViewCell: UICollectionViewCell {
         view.contentMode = .scaleAspectFill
         view.layer.cornerRadius = 12
         view.backgroundColor = .black
-        view.adjustsImageWhenAncestorFocused = true
+        view.adjustsImageWhenAncestorFocused = false
         view.layer.cornerRadius = 8
         return view
     }()
 
-    private lazy var titleLabel: UILabel = {
-        let label = UILabel()
-        label.font = UIFont.preferredFont(forTextStyle: .caption2)
-        label.textAlignment = .center
-        return label
+    private lazy var card: TVCardView = {
+        let view = TVCardView(frame: .zero)
+        view.cardBackgroundColor = .clear
+        view.contentView.addSubview(imageView)
+        imageView.snp.makeConstraints { $0.edges.equalToSuperview() }
+        view.footerView = TVLockupHeaderFooterView()
+        view.footerView?.titleLabel?.font = UIFont.preferredFont(forTextStyle: .subheadline)
+        view.footerView?.showsOnlyWhenAncestorFocused = true
+        return view
     }()
+
 
     // MARK: - Public methods
 
-    func update(media: MediaItemProtocol) {
-        titleLabel.text = media.name
-        TMDBService.getPosterFor(mediaType: media is Movie ? .movie : .tv, tmdb: media.tmdbID)
-            .receive(on: DispatchQueue.main)
-            .sink { [weak self] url in
-                self?.imageView.kf.setImage(with: url, options: [.backgroundDecode])
+    func update(media: MediaItem) {
+        card.footerView?.titleLabel?.text = media.name
+        if let tmdb = media.tmdbID {
+            TMDBService.getPosterFor(mediaType: media is Movie ? .movie : .tv, tmdb: tmdb)
+                .receive(on: DispatchQueue.main)
+                .sink { [weak self] url in
+                    self?.imageView.kf.setImage(with: url, options: [.backgroundDecode])
             }.dispose(bag)
+        }
     }
 }
 
 private extension MovieCollectionViewCell {
     func setupAppearance() {
-        clipsToBounds = false
-        addSubview(titleLabel)
-        addSubview(imageView)
-
-        imageView.snp.makeConstraints { (make) in
-            make.leading.trailing.top.equalToSuperview()
-        }
-
-        titleLabel.snp.makeConstraints { (make) in
-            make.leading.trailing.bottom.equalToSuperview()
-            make.top.equalTo(imageView.snp.bottom).offset(8)
-        }
+        contentView.clipsToBounds = false
+        contentView.addSubview(card)
+        card.snp.makeConstraints { $0.edges.equalToSuperview() }
     }
 }

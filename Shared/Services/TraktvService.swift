@@ -40,6 +40,11 @@ final class TraktvService {
         return URLSession.shared.dataTaskPublisher(for: request(path: "/shows/\(show.id)/seasons?extended=full"))
         .map { $0.data }
         .decode(type: [Season].self, decoder: JSONDecoder())
+        .map { $0.filter { $0.number > 0 }}
+        .mapError { error -> Error in
+            print(error)
+            return error
+        }
         .replaceError(with: [])
         .eraseToAnyPublisher()
     }
@@ -48,14 +53,32 @@ final class TraktvService {
         return URLSession.shared.dataTaskPublisher(for: request(path: "/shows/\(show.id)/seasons/\(season.number)/episodes"))
         .map { $0.data }
         .decode(type: [Episode].self, decoder: JSONDecoder())
+        .mapError { error -> Error in
+            print(error)
+            return error
+        }
         .replaceError(with: [])
         .eraseToAnyPublisher()
+    }
+
+    static func search(_ query: String) -> AnyPublisher<[TraktSearchResult], Never> {
+        return URLSession.shared.dataTaskPublisher(for: request(path: "/search/movie,show?query=\(query)"))
+            .map { $0.data }
+            .decode(type: [TraktSearchResult].self, decoder: JSONDecoder())
+            .mapError { error -> Error in
+                print(error)
+                return error
+            }
+            .replaceError(with: [])
+            .eraseToAnyPublisher()
     }
 }
 
 private extension TraktvService {
     static func request(path: String) -> URLRequest {
-        var request = URLRequest(url: URL(string: "\(base)\(path)")!)
+        let fullPath = base + path
+        let escapedPath = fullPath.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
+        var request = URLRequest(url: URL(string: escapedPath)!)
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         request.setValue("2", forHTTPHeaderField: "trakt-api-version")
         request.setValue(clientId, forHTTPHeaderField: "trakt-api-key")

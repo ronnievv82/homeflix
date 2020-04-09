@@ -98,11 +98,13 @@ private extension MovieDetailViewController {
             make.bottom.equalToSuperview().inset(40)
         }
 
-        TMDBService.getBackdropFor(mediaType: .movie, tmdb: viewModel.movie.tmdbID)
-            .receive(on: DispatchQueue.main)
-            .sink { [weak self] url in
-                self?.backgroundImageView.kf.setImage(with: url, options: [.backgroundDecode])
+        if let tmdb = viewModel.movie.tmdbID {
+            TMDBService.getBackdropFor(mediaType: .movie, tmdb: tmdb)
+                .receive(on: DispatchQueue.main)
+                .sink { [weak self] url in
+                    self?.backgroundImageView.kf.setImage(with: url, options: [.backgroundDecode])
             }.dispose(bag)
+        }
 
         viewModel.$torrents
             .subscribe(on: DispatchQueue.global(qos: .background))

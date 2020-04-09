@@ -13,8 +13,11 @@ import SwiftSoup
 final class SevenTorrentsService {
     private static let base: String = "https://www.7torrents.cc"
 
-    static func torrents<T: MediaItemProtocol>(item: T) -> AnyPublisher<[Torrent], Never> {
-        let path: String = "/search?query=\(item.name)+\(item.year)"
+    static func torrents(item: MediaItem) -> AnyPublisher<[Torrent], Never> {
+        guard let year = item.year else {
+            return Just([]).eraseToAnyPublisher()
+        }
+        let path: String = "/search?query=\(item.name)+\(year)"
         return URLSession.shared.dataTaskPublisher(for: request(path: path))
             .map { $0.data }
             .tryMap { try mapDataToTorrents($0) }

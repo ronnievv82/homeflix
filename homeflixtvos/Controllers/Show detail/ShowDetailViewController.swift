@@ -78,12 +78,14 @@ private extension ShowDetailViewController {
             make.bottom.equalToSuperview().inset(40)
         }
 
-        TMDBService.getBackdropFor(mediaType: .tv, tmdb: show.tmdbID)
-            .receive(on: DispatchQueue.main)
-            .sink { [weak self] url in
-                self?.backgroundImageView.kf.setImage(with: url, options: [.backgroundDecode])
+        if let tmdb = show.tmdbID {
+            TMDBService.getBackdropFor(mediaType: .tv, tmdb: tmdb)
+                .receive(on: DispatchQueue.main)
+                .sink { [weak self] url in
+                    self?.backgroundImageView.kf.setImage(with: url, options: [.backgroundDecode])
             }.dispose(bag)
 
+        }
         seasonsListController.$selectedSeason
             .compactMap { $0 }
             .assign(to: \.selectedSeason, on: episodesListController)

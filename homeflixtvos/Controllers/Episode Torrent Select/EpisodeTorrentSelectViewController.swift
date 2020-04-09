@@ -92,7 +92,7 @@ final class EpisodeTorrentSelectViewController: UIViewController {
             if let cell = cell as? SeasonTableViewCell {
                 cell.textLabel?.text = tor.name
                 cell.textLabel?.font = UIFont.preferredFont(forTextStyle: .headline)
-                cell.detailTextLabel?.text = "S: \(tor.seeds) | P: \(tor.peers)"
+                cell.detailTextLabel?.text = "S: \(tor.seeds) | L: \(tor.peers)"
                 cell.detailTextLabel?.font = UIFont.preferredFont(forTextStyle: .callout)
             }
             return cell

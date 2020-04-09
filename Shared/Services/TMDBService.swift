@@ -41,7 +41,7 @@ final class TMDBService {
     }
 
     static func getBackdropFor(mediaType: TMDBService.MediaType, tmdb: String) -> AnyPublisher<URL?, Never> {
-        let path: String = "/\(mediaType.rawValue)/\(tmdb)\(TMDB.images)?api_key=\(TMDB.apiKey)"
+        let path: String = "/\(mediaType.rawValue)/\(tmdb)\(TMDB.images)?api_key=\(TMDB.apiKey)&language=en-US&include_image_language=en"
         return URLSession.shared
             .dataTaskPublisher(for: request(path: path))
             .subscribe(on: DispatchQueue.global(qos: .background))

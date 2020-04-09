@@ -12,6 +12,7 @@ import SnapKit
 
 private enum Section {
     case main
+    case loadNext
 }
 
 final class MoviesViewController: UIViewController {
@@ -31,44 +32,46 @@ final class MoviesViewController: UIViewController {
         super.viewDidLoad()
 
         view.addSubview(collectionView)
-        collectionView.snp.makeConstraints { (make) in
-            make.edges.equalToSuperview().inset(40)
-        }
+        collectionView.snp.makeConstraints { $0.edges.equalToSuperview() }
 
         viewModel.$movies.sink { [weak self] mov in
             guard let self = self else { return }
             var snapshot = NSDiffableDataSourceSnapshot<Section, Movie>()
-            snapshot.appendSections([.main])
-            snapshot.appendItems(mov)
+            snapshot.appendSections([.main, .loadNext])
+            snapshot.appendItems(mov, toSection: .main)
             self.dataSource.apply(snapshot)
         }.dispose(bag)
     }
 
     private lazy var dataSource: UICollectionViewDiffableDataSource<Section, Movie> = {
         return UICollectionViewDiffableDataSource<Section, Movie>(collectionView: collectionView) { (collection, path, movie) -> UICollectionViewCell? in
-            let cell = collection.dequeueReusableCell(withReuseIdentifier: "myCell", for: path)
-            if let cell = cell as? MovieCollectionViewCell {
-                cell.update(media: movie)
-            }
+            let cell = collection.dequeueReusableCell(forIndexPath: path) as MovieCollectionViewCell
+            cell.update(media: movie)
             return cell
         }
     }()
 
+    private lazy var layout: UICollectionViewCompositionalLayout = {
+        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1/6), heightDimension: .fractionalWidth(1/6*1.5))
+        let groupItem = NSCollectionLayoutItem(layoutSize: itemSize)
+        let sectionSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .estimated(50))
+        let sectionGroup = NSCollectionLayoutGroup.horizontal(layoutSize: sectionSize, subitems: [groupItem])
+        let section = NSCollectionLayoutSection(group: sectionGroup)
+        return UICollectionViewCompositionalLayout(section: section)
+    }()
+
     private lazy var collectionView: UICollectionView = {
-        let view = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
+        let view = UICollectionView(frame: .zero, collectionViewLayout: layout)
         view.clipsToBounds = false
         view.delegate = self
-        view.register(MovieCollectionViewCell.self, forCellWithReuseIdentifier: "myCell")
+        view.registerCell(MovieCollectionViewCell.self)
         return view
     }()
 }
 
-extension MoviesViewController: UICollectionViewDelegateFlowLayout {
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let width = collectionView.frame.width / 7
-        return CGSize(width: width, height: width * 1.5)
-    }
+// MARK: - UICollectionViewDelegate
 
+extension MoviesViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let movie = viewModel.movies[indexPath.row]
         let vm = MovieDetailViewModel(movie: movie)

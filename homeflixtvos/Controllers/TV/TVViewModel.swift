@@ -33,7 +33,7 @@ final class TVViewModel {
         fetchCT()
     }
 
-    func getStreamLink(index: IndexPath) -> AnyPublisher<String?, Never> {
+    func getStreamChannel(index: IndexPath) -> AnyPublisher<TVChannel?, Never> {
         guard let section = TVStation.allCases[safe: index.section] else {
             return Just(nil).eraseToAnyPublisher()
         }
@@ -41,7 +41,7 @@ final class TVViewModel {
             case .ceskaTelevize:
                 return getPlaylist(channel: sections[section]![index.row])
             default:
-                return Just(sections[section]![index.row].currentProgramme.streamLink).eraseToAnyPublisher()
+                return Just(sections[section]![index.row]).eraseToAnyPublisher()
         }
     }
 }
@@ -94,7 +94,7 @@ private extension TVViewModel {
                         else {
                             return nil
                     }
-                    let programme = TVProgramme(previewImageUrl: preview, title: title, isVod: isVod, streamLink: nil)
+                    let programme = TVProgramme(preview: preview, title: title, isVod: isVod)
                     return TVChannel(id: id, name: name, currentProgramme: programme)
                 }
 
@@ -102,7 +102,7 @@ private extension TVViewModel {
             }).store(in: &bag)
     }
 
-    func getPlaylist(channel: TVChannel) -> AnyPublisher<String?, Never> {
+    func getPlaylist(channel: TVChannel) -> AnyPublisher<TVChannel?, Never> {
         var req2 = URLRequest(url: URL(string: "\(BASE_XML_URL)/services/ivysilani/xml/playlisturl/")!)
         req2.allHTTPHeaderFields = ["Content-type": "application/x-www-form-urlencoded",
                                     "Accept-encoding": "gzip",
@@ -132,14 +132,16 @@ private extension TVViewModel {
             req.httpMethod = "GET"
             return URLSession.shared.dataTaskPublisher(for: req)
         })
-        .compactMap { data -> String? in
+        .compactMap { data -> TVChannel? in
             let obj = try? JSONSerialization.jsonObject(with: data.data)
             if let obj = obj as? [String: Any],
                 let arr = obj["playlist"] as? [[String: Any]],
                 let play = arr.first?["streamUrls"] as? [String: Any],
                 let main = play["main"] as? String {
 
-                return main
+                var mutatedChannel = channel
+                mutatedChannel.updateStreamLink(main)
+                return mutatedChannel
             }
             return nil
         }

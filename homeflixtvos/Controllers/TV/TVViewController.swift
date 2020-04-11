@@ -67,7 +67,8 @@ final class TVViewController: UIViewController {
         let sectionSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .estimated(50))
         let sectionGroup = NSCollectionLayoutGroup.horizontal(layoutSize: sectionSize, subitems: [groupItem])
         let section = NSCollectionLayoutSection(group: sectionGroup)
-
+        section.orthogonalScrollingBehavior = .continuous
+        
         let sectionHeaderSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .estimated(50))
         let sectionHeaderItem = NSCollectionLayoutBoundarySupplementaryItem(
             layoutSize: sectionHeaderSize,
@@ -93,10 +94,10 @@ final class TVViewController: UIViewController {
 
 extension TVViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        viewModel.getStreamLink(index: indexPath)
+        viewModel.getStreamChannel(index: indexPath)
             .compactMap { $0 }
-            .sink { [weak self] link in
-                self?.startStream(link: link)
+            .sink { [weak self] channel in
+                self?.startStream(channel: channel)
             }.store(in: &bag)
     }
 }
@@ -113,13 +114,10 @@ private extension TVViewController {
         }
     }
 
-    func startStream(link: String) {
+    func startStream(channel: TVChannel) {
         DispatchQueue.main.async {
-            let player = AVPlayer(url: URL(string: link)!)
-            let cnt = AVPlayerViewController()
-            cnt.player = player
+            let cnt = TVPlayerViewController(channel: channel)
             self.present(cnt, animated: true, completion: nil)
-            player.play()
         }
     }
 }

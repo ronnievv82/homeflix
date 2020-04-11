@@ -72,6 +72,7 @@
 		1377F743242DDF6B00924074 /* TraktSearchResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1377F742242DDF6B00924074 /* TraktSearchResult.swift */; };
 		1377F744242DDF6B00924074 /* TraktSearchResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1377F742242DDF6B00924074 /* TraktSearchResult.swift */; };
 		1377F747242DE9F800924074 /* SearchResultCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1377F745242DE9F800924074 /* SearchResultCollectionViewCell.swift */; };
+		138CA770243F72E00033C3EF /* TVPlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 138CA76F243F72E00033C3EF /* TVPlayerViewController.swift */; };
 		139A1E0E243B942C00FCCC77 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 139A1E0D243B942C00FCCC77 /* Kingfisher */; };
 		139A1E0F243B942C00FCCC77 /* Kingfisher in Embed Frameworks */ = {isa = PBXBuildFile; productRef = 139A1E0D243B942C00FCCC77 /* Kingfisher */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		139A1E11243B9F0E00FCCC77 /* TVViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 139A1E10243B9F0E00FCCC77 /* TVViewModel.swift */; };
@@ -226,6 +227,7 @@
 		136A5B8623A3872F00BC0D06 /* MovieDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailViewModel.swift; sourceTree = "<group>"; };
 		1377F742242DDF6B00924074 /* TraktSearchResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TraktSearchResult.swift; sourceTree = "<group>"; };
 		1377F745242DE9F800924074 /* SearchResultCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultCollectionViewCell.swift; sourceTree = "<group>"; };
+		138CA76F243F72E00033C3EF /* TVPlayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TVPlayerViewController.swift; sourceTree = "<group>"; };
 		139A1E10243B9F0E00FCCC77 /* TVViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TVViewModel.swift; sourceTree = "<group>"; };
 		13A7CA5C2439032400C143FF /* TorrentStreamer.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = TorrentStreamer.xcodeproj; sourceTree = "<group>"; };
 		13A7CE48243A258500C143FF /* topshelf.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = topshelf.appex; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -524,6 +526,7 @@
 				13148A9823C90E3800EC0DC3 /* Show detail */,
 				1364549A23A0F1B9001A15EC /* Shows */,
 				13B6C2FD241B6950004B9DB8 /* TV */,
+				138CA76D243F72C30033C3EF /* TV Player */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -627,6 +630,14 @@
 				136A5B8623A3872F00BC0D06 /* MovieDetailViewModel.swift */,
 			);
 			path = "Movie detail";
+			sourceTree = "<group>";
+		};
+		138CA76D243F72C30033C3EF /* TV Player */ = {
+			isa = PBXGroup;
+			children = (
+				138CA76F243F72E00033C3EF /* TVPlayerViewController.swift */,
+			);
+			path = "TV Player";
 			sourceTree = "<group>";
 		};
 		13A7CA3D243901F300C143FF /* TorrentStreamer */ = {
@@ -1025,6 +1036,7 @@
 				13A8895E23D8D09E00AD935A /* SiriRemotePlayPauseGesture.swift in Sources */,
 				1305BDE223CF7B9D0019D365 /* SeasonTableViewCell.swift in Sources */,
 				13C7DF02239C23E1001BAAF0 /* EZTVTorrent.swift in Sources */,
+				138CA770243F72E00033C3EF /* TVPlayerViewController.swift in Sources */,
 				136A5B8523A386EB00BC0D06 /* MovieDetailViewController.swift in Sources */,
 				1342BE6023B10BE4003A5D00 /* BufferingBar.swift in Sources */,
 				13D0B88D23CB8A8200879687 /* Season.swift in Sources */,

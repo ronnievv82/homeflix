@@ -47,9 +47,9 @@ final class MovieCollectionViewCell: UICollectionViewCell {
         view.footerView = TVLockupHeaderFooterView()
         view.footerView?.titleLabel?.font = UIFont.preferredFont(forTextStyle: .subheadline)
         view.footerView?.showsOnlyWhenAncestorFocused = true
+        view.headerView = TVLockupHeaderFooterView()
         return view
     }()
-
 
     // MARK: - Public methods
 

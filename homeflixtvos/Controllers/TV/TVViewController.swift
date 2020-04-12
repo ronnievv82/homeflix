@@ -10,8 +10,9 @@ import UIKit
 import Combine
 import MPUtilsUIKit
 import AVKit
+import TVUIKit
 
-final class TVViewController: UIViewController {
+final class TVViewController: UICollectionViewController {
 
     // MARK: - Private properties
     private let viewModel: TVViewModel
@@ -21,7 +22,7 @@ final class TVViewController: UIViewController {
 
     init(viewModel: TVViewModel = TVViewModel()) {
         self.viewModel = viewModel
-        super.init(nibName: nil, bundle: nil)
+        super.init(collectionViewLayout: layout)
         tabBarItem = UITabBarItem(title: "TV", image: UIImage(systemName: "tv"), tag: 0)
     }
 
@@ -29,17 +30,14 @@ final class TVViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.addSubview(collectionView)
-        collectionView.snp.makeConstraints { $0.edges.equalTo(view.safeAreaLayoutGuide) }
-
+        collectionView.delaysContentTouches = false
+        collectionView.registerCell(ChannelCollectionViewCell.self)
+        collectionView.register(TVHeaderView.self,
+                                forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
+                                withReuseIdentifier: "header")
         viewModel.$sections.sink { [weak self] (_) in
             self?.reloadSnapshot()
         }.store(in: &bag)
-    }
-
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-//        viewModel.refresh()
     }
 
     // MARK: - Private properties
@@ -61,7 +59,7 @@ final class TVViewController: UIViewController {
         return source
     }()
 
-    private lazy var layout: UICollectionViewCompositionalLayout = {
+    private let layout: UICollectionViewCompositionalLayout = {
         let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1/4), heightDimension: .fractionalWidth(1/4*0.75))
         let groupItem = NSCollectionLayoutItem(layoutSize: itemSize)
         let sectionSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .estimated(50))
@@ -75,30 +73,15 @@ final class TVViewController: UIViewController {
             elementKind: UICollectionView.elementKindSectionHeader,
             alignment: .topLeading)
         section.boundarySupplementaryItems = [sectionHeaderItem]
-
         return UICollectionViewCompositionalLayout(section: section)
     }()
 
-    private lazy var collectionView: UICollectionView = {
-        let view = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        view.clipsToBounds = false
-        view.delegate = self
-        view.delaysContentTouches = false
-        view.registerCell(ChannelCollectionViewCell.self)
-        view.register(TVHeaderView.self,
-                      forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
-                      withReuseIdentifier: "header")
-        return view
-    }()
-}
 
-extension TVViewController: UICollectionViewDelegate {
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        viewModel.getStreamChannel(index: indexPath)
-            .compactMap { $0 }
-            .sink { [weak self] channel in
-                self?.startStream(channel: channel)
-            }.store(in: &bag)
+    // MARK: - Overrides
+
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let fsvc = TVFullscreenBrowseViewController(viewModel: viewModel, selectedIndexPath: indexPath)
+        present(fsvc, animated: false, completion: nil)
     }
 }
 
@@ -111,13 +94,6 @@ private extension TVViewController {
         }
         DispatchQueue.main.async {
             self.dataSource.apply(snapshot, animatingDifferences: true, completion: nil)
-        }
-    }
-
-    func startStream(channel: TVChannel) {
-        DispatchQueue.main.async {
-            let cnt = TVPlayerViewController(channel: channel)
-            self.present(cnt, animated: true, completion: nil)
         }
     }
 }

@@ -73,6 +73,8 @@
 		1377F744242DDF6B00924074 /* TraktSearchResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1377F742242DDF6B00924074 /* TraktSearchResult.swift */; };
 		1377F747242DE9F800924074 /* SearchResultCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1377F745242DE9F800924074 /* SearchResultCollectionViewCell.swift */; };
 		138CA770243F72E00033C3EF /* TVPlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 138CA76F243F72E00033C3EF /* TVPlayerViewController.swift */; };
+		1395127D24430F2A000F7EFC /* ChannelFullScreenCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1395127C24430F2A000F7EFC /* ChannelFullScreenCollectionCell.swift */; };
+		139512802443169B000F7EFC /* TVFullscreenBrowseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1395127F2443169B000F7EFC /* TVFullscreenBrowseViewController.swift */; };
 		139A1E0E243B942C00FCCC77 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 139A1E0D243B942C00FCCC77 /* Kingfisher */; };
 		139A1E0F243B942C00FCCC77 /* Kingfisher in Embed Frameworks */ = {isa = PBXBuildFile; productRef = 139A1E0D243B942C00FCCC77 /* Kingfisher */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		139A1E11243B9F0E00FCCC77 /* TVViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 139A1E10243B9F0E00FCCC77 /* TVViewModel.swift */; };
@@ -228,6 +230,8 @@
 		1377F742242DDF6B00924074 /* TraktSearchResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TraktSearchResult.swift; sourceTree = "<group>"; };
 		1377F745242DE9F800924074 /* SearchResultCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultCollectionViewCell.swift; sourceTree = "<group>"; };
 		138CA76F243F72E00033C3EF /* TVPlayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TVPlayerViewController.swift; sourceTree = "<group>"; };
+		1395127C24430F2A000F7EFC /* ChannelFullScreenCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelFullScreenCollectionCell.swift; sourceTree = "<group>"; };
+		1395127F2443169B000F7EFC /* TVFullscreenBrowseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TVFullscreenBrowseViewController.swift; sourceTree = "<group>"; };
 		139A1E10243B9F0E00FCCC77 /* TVViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TVViewModel.swift; sourceTree = "<group>"; };
 		13A7CA5C2439032400C143FF /* TorrentStreamer.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = TorrentStreamer.xcodeproj; sourceTree = "<group>"; };
 		13A7CE48243A258500C143FF /* topshelf.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = topshelf.appex; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -615,6 +619,7 @@
 			isa = PBXGroup;
 			children = (
 				13A7CEFC243A578600C143FF /* ChannelCollectionViewCell.swift */,
+				1395127C24430F2A000F7EFC /* ChannelFullScreenCollectionCell.swift */,
 				136A5B7923A2BC5500BC0D06 /* MovieCollectionViewCell.swift */,
 				1377F745242DE9F800924074 /* SearchResultCollectionViewCell.swift */,
 				1305BDE123CF7B9D0019D365 /* SeasonTableViewCell.swift */,
@@ -638,6 +643,14 @@
 				138CA76F243F72E00033C3EF /* TVPlayerViewController.swift */,
 			);
 			path = "TV Player";
+			sourceTree = "<group>";
+		};
+		1395127E2443167A000F7EFC /* TV Fullscreen browse */ = {
+			isa = PBXGroup;
+			children = (
+				1395127F2443169B000F7EFC /* TVFullscreenBrowseViewController.swift */,
+			);
+			path = "TV Fullscreen browse";
 			sourceTree = "<group>";
 		};
 		13A7CA3D243901F300C143FF /* TorrentStreamer */ = {
@@ -705,6 +718,7 @@
 			children = (
 				13B6C2FE241B697D004B9DB8 /* TVViewController.swift */,
 				139A1E10243B9F0E00FCCC77 /* TVViewModel.swift */,
+				1395127E2443167A000F7EFC /* TV Fullscreen browse */,
 			);
 			path = TV;
 			sourceTree = "<group>";
@@ -1029,6 +1043,7 @@
 			files = (
 				13C7DF0C239C35BA001BAAF0 /* AnyCancellableExtension.swift in Sources */,
 				1309DD4423C39D6C008EECB3 /* OpenSubtitleHash.swift in Sources */,
+				1395127D24430F2A000F7EFC /* ChannelFullScreenCollectionCell.swift in Sources */,
 				1342BE4D23AE3299003A5D00 /* Torrent.swift in Sources */,
 				1335BE7B23C4F0A1000C66E7 /* HFError.swift in Sources */,
 				13A8895923D8AFCB00AD935A /* EqualizerProfile.swift in Sources */,
@@ -1059,6 +1074,7 @@
 				13C7DEFB239C1E9B001BAAF0 /* EZTVService.swift in Sources */,
 				136A5B8223A2D77A00BC0D06 /* TMDBService.swift in Sources */,
 				1342BE4923AD6A02003A5D00 /* PlayerViewController.swift in Sources */,
+				139512802443169B000F7EFC /* TVFullscreenBrowseViewController.swift in Sources */,
 				1342BE6123B10BE4003A5D00 /* ProgressBar.swift in Sources */,
 				13C7DEFE239C1F12001BAAF0 /* MediaItem.swift in Sources */,
 				1377F744242DDF6B00924074 /* TraktSearchResult.swift in Sources */,

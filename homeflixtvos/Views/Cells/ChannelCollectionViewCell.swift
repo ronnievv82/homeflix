@@ -43,10 +43,6 @@ final class ChannelCollectionViewCell: UICollectionViewCell {
         channel = nil
     }
 
-    override var preferredFocusEnvironments: [UIFocusEnvironment] {
-        return [card.contentView]
-    }
-
     private lazy var card: TVCardView = {
         let view = TVCardView()
         view.contentViewInsets = NSDirectionalEdgeInsets(top: 0, leading: 0, bottom: -5, trailing: 0)

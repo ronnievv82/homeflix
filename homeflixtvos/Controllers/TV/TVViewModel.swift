@@ -32,18 +32,6 @@ final class TVViewModel {
     func refresh() {
         fetchCT()
     }
-
-    func getStreamChannel(index: IndexPath) -> AnyPublisher<TVChannel?, Never> {
-        guard let section = TVStation.allCases[safe: index.section] else {
-            return Just(nil).eraseToAnyPublisher()
-        }
-        switch section {
-            case .ceskaTelevize:
-                return getPlaylist(channel: sections[section]![index.row])
-            default:
-                return Just(sections[section]![index.row]).eraseToAnyPublisher()
-        }
-    }
 }
 
 private extension TVViewModel {
@@ -95,58 +83,11 @@ private extension TVViewModel {
                             return nil
                     }
                     let programme = TVProgramme(preview: preview, title: title, isVod: isVod)
-                    return TVChannel(id: id, name: name, currentProgramme: programme)
+                    return TVChannel(id: id, name: name, station: .ceskaTelevize, currentProgramme: programme)
                 }
 
                 self?.sections[.ceskaTelevize] = channels
             }).store(in: &bag)
-    }
-
-    func getPlaylist(channel: TVChannel) -> AnyPublisher<TVChannel?, Never> {
-        var req2 = URLRequest(url: URL(string: "\(BASE_XML_URL)/services/ivysilani/xml/playlisturl/")!)
-        req2.allHTTPHeaderFields = ["Content-type": "application/x-www-form-urlencoded",
-                                    "Accept-encoding": "gzip",
-                                    "Connection": "Keep-Alive",
-                                    "User-Agent": "Dalvik/1.6.0 (Linux; U; Android 4.4.4; Nexus 7 Build/KTU84P)"]
-        req2.httpMethod = "POST"
-        let quality: String = channel.currentProgramme.isVod == "1" ? "max720p" : "web"
-        let playerType: String = channel.currentProgramme.isVod == "1" ? "progressive" : "ios"
-        let params = [
-            "token": token,
-            "ID": channel.id,
-            "quality": quality,
-            "playerType": playerType,
-            "playlistType": "json"
-        ]
-        req2.httpBody = params.percentEncoded()
-        return URLSession.shared.dataTaskPublisher(for: req2)
-            .compactMap { (data, _) -> URL? in
-                let xml = SWXMLHash.parse(data)
-                print(xml)
-                let string = xml["playlistURL"].element?.text ?? ""
-                return URL(string: string)
-        }
-        .flatMap({ url -> URLSession.DataTaskPublisher in
-            var req = URLRequest(url: url)
-            req.allHTTPHeaderFields = ["Content-Type": "application/json"]
-            req.httpMethod = "GET"
-            return URLSession.shared.dataTaskPublisher(for: req)
-        })
-        .compactMap { data -> TVChannel? in
-            let obj = try? JSONSerialization.jsonObject(with: data.data)
-            if let obj = obj as? [String: Any],
-                let arr = obj["playlist"] as? [[String: Any]],
-                let play = arr.first?["streamUrls"] as? [String: Any],
-                let main = play["main"] as? String {
-
-                var mutatedChannel = channel
-                mutatedChannel.updateStreamLink(main)
-                return mutatedChannel
-            }
-            return nil
-        }
-        .replaceError(with: nil)
-        .eraseToAnyPublisher()
     }
 
     @objc func becameActive() {

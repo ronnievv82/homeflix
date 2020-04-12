@@ -25,7 +25,7 @@ final class ChannelCollectionViewCell: UICollectionViewCell {
                 }
             } else {
                 card.footerView?.titleLabel?.text = nil
-                imageView.image = nil
+                imageView.image = UIImage(imageLiteralResourceName: "poster")
             }
         }
     }

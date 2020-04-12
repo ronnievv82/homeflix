@@ -31,7 +31,7 @@ enum TVStation: CaseIterable {
             case .nova: return [.nova, .nova2, .novaAction, .novaCinema]
             case .rtvs: return [.rtvs1, .rtvs2]
             case .markiza: return [.markiza]
-            case .eurosport: return [.eurosport1]
+            case .eurosport: return [.eurosport1, .eurosport2]
             case .hbo: return [.hbo, .hbo2]
             default: return []
         }
@@ -142,10 +142,17 @@ extension TVChannel {
     }
     static var eurosport1: TVChannel {
         let programme = TVProgramme(
-            preview: "http://www.itver.cc/wp-content/uploads/2015/07/Eurosport-HD-Logo.jpg",
+            preview: "https://cdn.sincroguia.tv/uploads/images/e/u/r/eurosport1.jpg",
             streamLink: "http://188.35.9.14:21081/udp/098t"
         )
         return TVChannel(id: "eurosport1", name: "Eurosport 1 HD", currentProgramme: programme)
+    }
+    static var eurosport2: TVChannel {
+        let programme = TVProgramme(
+            preview: "https://cdn.sincroguia.tv/uploads/images/e/u/r/eurosports2.jpg",
+            streamLink: "http://188.35.9.11:21151/udp/192c"
+        )
+        return TVChannel(id: "eurosport2", name: "Eurosport 2 HD", currentProgramme: programme)
     }
     static var rtvs1: TVChannel {
         let programme = TVProgramme(

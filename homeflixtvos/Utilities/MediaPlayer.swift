@@ -22,11 +22,11 @@ final class MediaPlayer: VLCMediaPlayer {
 
     func setupSubtitleAppearance() {
         let settings = SubtitleSettings.shared
-        (self as VLCFontAppearance).setTextRendererFontSize?(NSNumber(value: settings.size.rawValue))
-        (self as VLCFontAppearance).setTextRendererFontColor?(NSNumber(value: settings.color.hexInt))
-        (self as VLCFontAppearance).setTextRendererFont?(settings.font.fontName as NSString)
-        let forceBold = settings.style == .bold || settings.style == .boldItalic
-        (self as VLCFontAppearance).setTextRendererFontForceBold?(NSNumber(booleanLiteral: forceBold))
+//        (self as VLCFontAppearance).setTextRendererFontSize?(NSNumber(value: settings.size.rawValue))
+//        (self as VLCFontAppearance).setTextRendererFontColor?(NSNumber(value: settings.color.hexInt))
+//        (self as VLCFontAppearance).setTextRendererFont?(settings.font.fontName as NSString)
+//        let forceBold = settings.style == .bold || settings.style == .boldItalic
+//        (self as VLCFontAppearance).setTextRendererFontForceBold?(NSNumber(booleanLiteral: forceBold))
         if let media = media {
             media.addOptions(["subsdec-encoding": settings.encoding])
         }
